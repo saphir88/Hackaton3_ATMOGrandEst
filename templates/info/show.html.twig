@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Info{% endblock %}
+
+{% block body %}
+    <h1>Info</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ info.id }}</td>
+            </tr>
+            <tr>
+                <th>Commune</th>
+                <td>{{ info.commune }}</td>
+            </tr>
+            <tr>
+                <th>Centroidx</th>
+                <td>{{ info.centroidx }}</td>
+            </tr>
+            <tr>
+                <th>Centroidy</th>
+                <td>{{ info.centroidy }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ info.date }}</td>
+            </tr>
+            <tr>
+                <th>Echeance</th>
+                <td>{{ info.echeance }}</td>
+            </tr>
+            <tr>
+                <th>Indiceno2</th>
+                <td>{{ info.indiceno2 }}</td>
+            </tr>
+            <tr>
+                <th>Indiceo3</th>
+                <td>{{ info.indiceo3 }}</td>
+            </tr>
+            <tr>
+                <th>Indicepm10</th>
+                <td>{{ info.indicepm10 }}</td>
+            </tr>
+            <tr>
+                <th>Indiceso2</th>
+                <td>{{ info.indiceso2 }}</td>
+            </tr>
+            <tr>
+                <th>Qualiteair</th>
+                <td>{{ info.qualiteair }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('info_index') }}">back to list</a>
+
+    <a href="{{ path('info_edit', {'id': info.id}) }}">edit</a>
+
+    {{ include('info/_delete_form.html.twig') }}
+{% endblock %}

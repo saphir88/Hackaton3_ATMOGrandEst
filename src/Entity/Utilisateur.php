@@ -5,43 +5,58 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\UtilisateurRepository")
+ * Utilisateur
+ *
+ * @ORM\Table(name="utilisateur")
+ * @ORM\Entity
  */
 class Utilisateur
 {
     /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="sexe", type="string", length=255, nullable=false)
      */
     private $sexe;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="ville", type="string", length=255, nullable=false)
      */
     private $ville;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="age", type="string", length=255, nullable=false)
      */
     private $age;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @var bool|null
+     *
+     * @ORM\Column(name="sport", type="boolean", nullable=true)
      */
     private $sport;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="mail", type="string", length=255, nullable=false)
      */
     private $mail;
 
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -105,4 +120,6 @@ class Utilisateur
 
         return $this;
     }
+
+
 }
