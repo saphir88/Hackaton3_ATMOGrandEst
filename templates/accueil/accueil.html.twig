@@ -2,19 +2,137 @@
 
 {% block body %}
 <h1>Accueil</h1>
-    <section>
-        <div class="container-fluid">
+    <section class="section1">
+        <div class="container">
             <div class="row">
-                <div class="border">
-                    <p>Test</p>
+                <div class="border col-5 ">
+                    <p>Api Weather</p>
+                    <form method="POST" type="">
+                        <input placeholder="Ville">
+                        <button type="submit">Envoyer</button>
+                    </form>
+                    <p>Protoxyde d'azote (N2O)</p>
+                    <p>Ozone (O3)</p>
+                    <p>Particules fines (PM10)</p>
+                    <p>Temperature</p>
+                    <p>Image du temps</p>
+                </div>
+                <div class="border  col-6 offset-1">
+                    <p>Map</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section2">
+        <div class="container">
+            <div class="row">
+                <div class="border col-12">
+                    <p>Recommandations</p>
+
+                    <p>Personnes agées : Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+
+                    <p>Asmathiques : Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+
+                    <p> Enfants en bas âge : Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+
+                    <p> Activités extérieures / jogging : Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+
+                    <p>Activités extérieures / jogging :Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section3">
+        <div class="container">
+            <div class="row">
+                <div class="border col-12">
+                    <p>News Letter</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                <form method="POST">
+                    <div>
+                        <input placeholder="Mail">
+                    </div>
+                    <div>
+                        <input placeholder="Ville de résidence">
+                    </div>
+                    <div>
+                        <input placeholder="Lieu de travail">
+                    </div>
+                    <p>je suis:</p>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                        <label class="form-check-label" for="inlineRadio1"> un homme</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                        <label class="form-check-label" for="inlineRadio2">une femme</label>
+                    </div>
+                    <select class="form-control col-6">
+                        <option>Votre tranche D'age</option>
+                        <option>18/25</option>
+                        <option>25/35</option>
+                        <option>35/55</option>
+                        <option>55/70</option>
+                        <option>70+</option>
+                    </select>
+
+                    <select class="form-control col-6">
+                        <option>quelle principale acitivite physique extérieures pratiquez vous ?</option>
+                        <option>18/25</option>
+                        <option>25/35</option>
+                        <option>35/55</option>
+                        <option>55/70</option>
+                        <option>70+</option>
+                    </select>
+
+                    <select class="form-control col-6">
+                        <option>quelle est votre moyen de transport prinipal ?</option>
+                        <option>18/25</option>
+                        <option>25/35</option>
+                        <option>35/55</option>
+                        <option>55/70</option>
+                        <option>70+</option>
+                    </select>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section4">
+        <div class="container">
+            <div class="row">
+                <div class="border col-12">
+                    <p>Stat</p>
                 </div>
             </div>
         </div>
     </section>
 
     <style>
-        .container-fluid{
+        .border{
             border: 1px solid black;
+        }
+        .section2{
+            margin-top: 20px;
+        }
+        .section3{
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        .section4{
+            margin-top: 20px;
+            margin-bottom: 100px;
         }
     </style>
 {% endblock %}
