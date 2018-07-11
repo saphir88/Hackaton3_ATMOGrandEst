@@ -1,2 +1,10 @@
+// assets/css/app.scss
+
+// customize some Bootstrap variables
+
+
+// the ~ allows you to reference things in node_modules
+@import "~bootstrap/scss/bootstrap";
+
 $bleu: #00adc6;
 $gris: #4d4d4d;
