@@ -3,25 +3,39 @@
 {% block title %}Welcome!{% endblock %}
 
 {% block body %}
-    <p><b>Start typing a name in the input field below:</b></p>
     <form>
-        First name: <input type="text" onkeyup="showHint(this.value)">
+        Cherchez une ville: <input type="text" list="ville" onkeyup="showHint(this.value)">
     </form>
-    <p>Suggestions: <span id="txtHint"></span></p>
+
+    <datalist id="ville">
+    </datalist>
 {% endblock %}
 {% block javascripts %}
     <script>
+        var commune = [];
+
+        {% for commune in tableau %}
+        commune.push('{{ commune }}');
+        {% endfor %}
+
         function showHint(str) {
+
             if (str.length == 0) {
                 document.getElementById("txtHint").innerHTML = "";
                 return;
             } else {
                 var xmlhttp = new XMLHttpRequest();
+
                 xmlhttp.onreadystatechange = function() {
                     if (this.readyState == 4 && this.status == 200) {
-                        document.getElementById("txtHint").innerHTML = this.responseText;
+                        for (var i=0; i <  commune.length;++i){
+                            str += '<option value="'+commune[i]+'" />';
+                        }
+                        var my_list = document.getElementById("ville");
+                        my_list.innerHTML = str;
+
                     }
-                }
+                };
                 xmlhttp.open("GET", "/test/?q="+str, true);
                 xmlhttp.send();
             }
