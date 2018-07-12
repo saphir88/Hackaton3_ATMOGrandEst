@@ -85,6 +85,9 @@ class MainController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $form->getData();
+
+            // Faire l'appel au serice mail ICI !!!!
+//            dump($_POST['form']["email"]);die;
             $user = $form->getData();
              $entityManager = $this->getDoctrine()->getManager();
              $entityManager->persist($user);
