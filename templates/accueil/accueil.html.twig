@@ -16,14 +16,13 @@
                     </datalist>
                     {% if open is not empty %}
                         <br>
-                        {{ dump(open) }}
                         <p><strong>{{ open.location.name }}</strong></p>
                         <input type="hidden" id="latitude" name="latitude" value={{ open.location.lat }}>
                         <input type="hidden" id="longitude" name="longitude" value={{ open.location.lon }}>
                         <div class="row">
                             <div class="col-6">
                                 <h4>Météo actuelle:</h4>
-                                <img src="{{ open.current.condition.icon }}" style="float: left">
+                                <img src="cdi:{{ open.current.condition.icon }}" style="float: left">
                                 <p>{{ open.current.condition.text }}</p>
                                 <p>{{ open.current.temp_c }}°C</p>
                             </div>
@@ -54,7 +53,7 @@
                 <div id="map" class="border col-6 offset-1"></div>
                 <div id="infowindow-content">
                     <span id="place-name"  class="title"></span><br>
-                    Place ID <span id="place-id"></span><br>
+                    <span id="place-id"></span><br>
                     <span id="place-address"></span>
                 </div>
             </div>
