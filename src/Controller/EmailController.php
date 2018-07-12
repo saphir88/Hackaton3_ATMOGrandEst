@@ -10,7 +10,10 @@ namespace App\Controller;
 
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\Users;
+use App\Entity\Info;
 
 
 /**
@@ -24,6 +27,14 @@ class EmailController extends Controller
      * @Route("/email", name="email", methods="GET")
      */
     public function EmailAction(){
-        return $this->render('email.html.twig');
+
+        $users=$this->getDoctrine()->getManager()->getRepository(Users::class)->findAll();
+        $info=$this->getDoctrine()->getManager()->getRepository(Info::class)->findAll();
+
+        // replace this example code with whatever you need
+        return $this->render('email.html.twig', [
+            'users' => $users,
+            'info' => $info
+        ]);
     }
 }
