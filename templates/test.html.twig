@@ -22,8 +22,8 @@
                 <div class="col-5 col-offset-1">
                     <p>Prévision pour la journée :</p>
                     {% for forecast in open.forecast.forecastday %}
-                        <p>Temp min: {{ forecast.day.mintemp_c }}</p>
-                        <p>Temp max: {{ forecast.day.maxtemp_c }}</p>
+                        <p>min: {{ forecast.day.mintemp_c }}</p>
+                        <p>max: {{ forecast.day.maxtemp_c }}</p>
                         <p>{{ forecast.day.condition.text }}</p>
                         <img src="{{ forecast.day.condition.icon }}">
                     {% endfor %}

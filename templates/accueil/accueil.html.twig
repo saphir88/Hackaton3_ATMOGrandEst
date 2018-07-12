@@ -6,13 +6,44 @@
             <div class="row">
                 <div class="border col-5 ">
                     <p>Api Weather</p>
-                    <input id="pac-input" class="controls" type="text"
-                           placeholder="Enter a location">
-                    <p>Protoxyde d'azote (N2O)</p>
-                    <p>Ozone (O3)</p>
-                    <p>Particules fines (PM10)</p>
-                    <p>Temperature</p>
-                    <p>Image du temps</p>
+
+
+                    <form action="{{ path('accueil') }}" method="post">
+                        Cherchez une ville: <input type="text" name="ville" list="ville" autocomplete="off" onkeyup="showHint(this.value)">
+                        <input type="submit">
+                    </form>
+                    <datalist id="ville">
+                    </datalist>
+                    {% if open is not empty %}
+                        <br>
+                        <p><strong>{{ open.location.name }}</strong></p>
+                        <div class="row">
+                            <div class="col-6">
+                                <h4>Météo actuelle:</h4>
+                                <img src="{{ open.current.condition.icon }}" style="float: left">
+                                <p>{{ open.current.condition.text }}</p>
+                                <p>{{ open.current.temp_c }}°C</p>
+                            </div>
+                            <div class="col-6">
+                                <h4>Prévision: </h4>
+                                {% for forecast in open.forecast.forecastday %}
+                                    <img src="{{ forecast.day.condition.icon }}" style="float: left">
+                                    <p>min: {{ forecast.day.mintemp_c }}°C</p>
+                                    <p>max: {{ forecast.day.maxtemp_c }}°C</p>
+                                    <p>{{ forecast.day.condition.text }}</p>
+
+                                {% endfor %}
+                            </div>
+                        </div>
+                        {% if donnees is not empty %}
+                            <p>Taux protoxyde d'azote (N2O): {{ donnees.indiceno2 }}</p>
+                            <p>Ozone (O3): {{ donnees.indiceo3 }}</p>
+                            <p>Particules fines (PM10): {{ donnees.indicepm10 }}</p>
+                            <p>Qualité de l'air: {{ donnees.qualiteair }}</p>
+                        {% endif %}
+                    {% else %}
+                        <p style="height: 200px;"></p>
+                    {% endif %}
                 </div>
                 <div id="map" class="border col-6 offset-1"></div>
                 <div id="infowindow-content">
@@ -62,65 +93,6 @@
                                 {{ form_start(form) }}
                                 {{ form_widget(form) }}
                                 {{ form_end(form) }}
-                                {#<form method="POST">
-                                    <div>
-                                        <input placeholder="Mail">
-                                    </div>
-                                    <div>
-                                        <input placeholder="Ville de résidence">
-                                    </div>
-                                    <div>
-                                        <input placeholder="Lieu de travail">
-                                    </div>
-                                    <p>je suis:</p>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                                        <label class="form-check-label" for="inlineRadio1"> un homme</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                                        <label class="form-check-label" for="inlineRadio2">une femme</label>
-                                    </div>
-                                    <div>
-                                        <label class="form-check-label" for="inlineRadio2">Votre tranche d'age</label>
-                                        <select class="form-control col-6">
-                                            <option>...</option>
-                                            <option>18/25</option>
-                                            <option>25/35</option>
-                                            <option>35/55</option>
-                                            <option>55/70</option>
-                                            <option>70+</option>
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <label class="form-check-label" for="inlineRadio2">quelle principale acitivite physique extérieures pratiquez vous ?</label>
-                                        <select class="form-control col-6">
-                                            <option>...</option>
-                                            <option>Foot</option>
-                                            <option>Course</option>
-                                            <option>Vélo</option>
-                                            <option>autre</option>
-                                            <option>autre</option>
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <label class="form-check-label" for="inlineRadio2">quelle principale acitivite physique extérieures pratiquez vous ?</label>
-                                        <select class="form-control col-6">
-                                            <option>...</option>
-                                            <option>Voiture</option>
-                                            <option>Train</option>
-                                            <option>Vélo</option>
-                                            <option>autre</option>
-                                            <option>autre</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                        <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                </form>#}
-
                             </div>
                         </div>
                     </div>
@@ -172,6 +144,7 @@
 
             var autocomplete = new google.maps.places.Autocomplete(input);
             autocomplete.bindTo('bounds', map);
+
 
             var infowindow = new google.maps.InfoWindow();
             var infowindowContent = document.getElementById('infowindow-content');
@@ -271,7 +244,36 @@
                    }
                }
            });
+       </script>
 
+       <script>
+           var commune = [];
 
+           {% for commune in tableau %}
+           commune.push('{{ commune }}');
+           {% endfor %}
+
+           function showHint(str) {
+
+               if (str.length == 0) {
+                   document.getElementById("txtHint").innerHTML = "";
+                   return;
+               } else {
+                   var xmlhttp = new XMLHttpRequest();
+
+                   xmlhttp.onreadystatechange = function() {
+                       if (this.readyState == 4 && this.status == 200) {
+                           for (var i=0; i <  commune.length;++i){
+                               str += '<option value="'+commune[i]+'" />';
+                           }
+                           var my_list = document.getElementById("ville");
+                           my_list.innerHTML = str;
+
+                       }
+                   };
+                   xmlhttp.open("GET", "/test/?q="+str, true);
+                   xmlhttp.send();
+               }
+           }
        </script>
    {% endblock %}
