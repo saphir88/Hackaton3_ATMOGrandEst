@@ -49,6 +49,26 @@
             </div>
         </div>
     </section>
+    <section class="section3">
+        <div class="container">
+            <div class="row">
+                <div class="border col-12">
+                    <p>Sport</p>
+                    <canvas id="doughnut-chart"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section3">
+        <div class="container">
+            <div class="row">
+                <div class="border col-12">
+                    <p>Transport</p>
+                    <canvas id="pie-chart"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <section class="section4">
         <div class="container">
@@ -62,65 +82,6 @@
                                 {{ form_start(form) }}
                                 {{ form_widget(form) }}
                                 {{ form_end(form) }}
-                                {#<form method="POST">
-                                    <div>
-                                        <input placeholder="Mail">
-                                    </div>
-                                    <div>
-                                        <input placeholder="Ville de résidence">
-                                    </div>
-                                    <div>
-                                        <input placeholder="Lieu de travail">
-                                    </div>
-                                    <p>je suis:</p>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                                        <label class="form-check-label" for="inlineRadio1"> un homme</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                                        <label class="form-check-label" for="inlineRadio2">une femme</label>
-                                    </div>
-                                    <div>
-                                        <label class="form-check-label" for="inlineRadio2">Votre tranche d'age</label>
-                                        <select class="form-control col-6">
-                                            <option>...</option>
-                                            <option>18/25</option>
-                                            <option>25/35</option>
-                                            <option>35/55</option>
-                                            <option>55/70</option>
-                                            <option>70+</option>
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <label class="form-check-label" for="inlineRadio2">quelle principale acitivite physique extérieures pratiquez vous ?</label>
-                                        <select class="form-control col-6">
-                                            <option>...</option>
-                                            <option>Foot</option>
-                                            <option>Course</option>
-                                            <option>Vélo</option>
-                                            <option>autre</option>
-                                            <option>autre</option>
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <label class="form-check-label" for="inlineRadio2">quelle principale acitivite physique extérieures pratiquez vous ?</label>
-                                        <select class="form-control col-6">
-                                            <option>...</option>
-                                            <option>Voiture</option>
-                                            <option>Train</option>
-                                            <option>Vélo</option>
-                                            <option>autre</option>
-                                            <option>autre</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                        <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                </form>#}
-
                             </div>
                         </div>
                     </div>
@@ -232,7 +193,7 @@
                        "Homme: 55/70", "Femme:55/70", "Homme:70+","Femme:70+"],
                    datasets: [{
                        label: 'All',
-                       data: [40,50, 19, 50, 5, 2, 3,40,90,30],
+                       data: [ {{ nbhommes1825 }},{{ nbfemmes1825 }}, {{ nbhommes2535 }}, {{ nbfemmes2535 }},  {{ nbhommes3555 }},  {{ nbfemmes3555 }},  {{ nbhommes5570 }},{{ nbfemmes5570 }}, {{ nbhommes70 }},{{ nbfemmes70 }}],
                        backgroundColor: [
                            'rgba(54, 162, 235, 0.2)',
                            'rgba(255, 99, 132, 0.2)',
@@ -268,6 +229,46 @@
                                beginAtZero:true
                            }
                        }]
+                   }
+               }
+           });
+       </script>
+       <script>
+           new Chart(document.getElementById("doughnut-chart"), {
+               type: 'doughnut',
+               data: {
+                   labels: ["Foot", "Course", "Equitation", "Velo", "Randonnée","Autre"],
+                   datasets: [
+                       {
+                           label: "Population (millions)",
+                           backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850","#c40850"],
+                           data: [{{ nbFoot }},{{ nbCourse }},{{ nbEquitation }},{{ nbvelo }},{{ nbRandonnee }},{{ nbAutre }}]
+                       }
+                   ]
+               },
+               options: {
+                   title: {
+                       display: true,
+                       text: 'Predicted world population (millions) in 2050'
+                   }
+               }
+           });
+       </script>
+       <script>
+           new Chart(document.getElementById("pie-chart"), {
+               type: 'pie',
+               data: {
+                   labels: ["Voiture","Covoiturage", "Vélo", "À pied", "Transport en commun"],
+                   datasets: [{
+                       label: "Population (millions)",
+                       backgroundColor: ["#3e95cd","#000ea2", "#8e5ea2","#3cba9f","#e8c3b9"],
+                       data: [{{ nbvoiture }},{{ nbCovoiturage }},{{ nbVelo }},{{ nbapied }},{{ nbapied }}]
+                   }]
+               },
+               options: {
+                   title: {
+                       display: true,
+                       text: 'Predicted world population (millions) in 2050'
                    }
                }
            });
