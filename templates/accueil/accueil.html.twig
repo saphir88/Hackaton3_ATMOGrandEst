@@ -54,28 +54,49 @@
             </div>
         </div>
     </section>
-
+    {% if donnees is not empty %}
     <section class="section2">
         <div class="container">
             <div class="row">
                 <div class="border col-12">
-                    <p>Recommandations</p>
-                    <p>Personnes agées : Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                    <p>Asmathiques : Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                    <p> Enfants en bas âge : Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                    <p> Activités extérieures / jogging : Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                    <p>Activités extérieures / jogging :Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        {% if donnees.qualiteAir == "Bonne" %}
+                            <p>Recommandations</p>
+                            <p>Personnes agées : Bonne</p>
+                            <p>Enfants en bas âge : Bonne</p>
+                            <p>Asmathiques : Bonne</p>
+                            <p>Activités extérieures / jogging : Bonne</p>
+                        {% elseif donnees.qualiteAir == "Moyenne" %}
+                            <p>Recommandations</p>
+                            <p>Personnes agées : Moyenne</p>
+                            <p>Enfants en bas âge : Moyenne</p>
+                            <p>Asmathiques : Moyenne</p>
+                            <p>Activités extérieures / jogging : Moyenne</p>
+                        {% elseif donnees.qualiteAir == "Médiocre" %}
+                            <p>Recommandations</p>
+                            <p>Personnes agées : Médiocre</p>
+                            <p>Enfants en bas âge : Médiocre</p>
+                            <p>Asmathiques : Médiocre</p>
+                            <p>Activités extérieures / jogging : Médiocre</p>
+                        {% else %}
+                            <p>Recommandations</p>
+                            <p>Personnes agées : Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <p>Asmathiques : Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <p>Enfants en bas âge : Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <p>Activités extérieures / jogging : Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <p>Activités extérieures / jogging :Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        {% endif %}
                 </div>
             </div>
         </div>
     </section>
+    {% endif %}
 
     <section class="section3">
         <div class="container">
             <div class="row">
-                <div class="border col-12">
+                <div class="border col-8 offset-2">
                     <p>Stat</p>
-                    <canvas id="myChart" width="200" height="100"></canvas>
+                    <canvas id="myChart"></canvas>
                 </div>
             </div>
         </div>
@@ -83,18 +104,10 @@
     <section class="section3">
         <div class="container">
             <div class="row">
-                <div class="border col-12">
-                    <p>Sport</p>
+                <div class="border col-6">
                     <canvas id="doughnut-chart"></canvas>
                 </div>
-            </div>
-        </div>
-    </section>
-    <section class="section3">
-        <div class="container">
-            <div class="row">
-                <div class="border col-12">
-                    <p>Transport</p>
+                <div class="border col-6 ">
                     <canvas id="pie-chart"></canvas>
                 </div>
             </div>
@@ -231,7 +244,7 @@
                    labels: ["Homme:18/25", "Femme:18/25","Homme:25/35","Femme: 25/35","Homme: 35/55","Femme: 35/55",
                        "Homme: 55/70", "Femme:55/70", "Homme:70+","Femme:70+"],
                    datasets: [{
-                       label: 'All',
+                       label: 'Tout',
                        data: [ {{ nbhommes1825 }},{{ nbfemmes1825 }}, {{ nbhommes2535 }}, {{ nbfemmes2535 }},  {{ nbhommes3555 }},  {{ nbfemmes3555 }},  {{ nbhommes5570 }},{{ nbfemmes5570 }}, {{ nbhommes70 }},{{ nbfemmes70 }}],
                        backgroundColor: [
                            'rgba(54, 162, 235, 0.2)',
@@ -268,6 +281,10 @@
                                beginAtZero:true
                            }
                        }]
+                   },
+                   title: {
+                       display: true,
+                       text: 'Personne'
                    }
                }
            });
@@ -279,7 +296,7 @@
                    labels: ["Foot", "Course", "Equitation", "Velo", "Randonnée","Autre"],
                    datasets: [
                        {
-                           label: "Population (millions)",
+                           label: "Sport",
                            backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850","#c40850"],
                            data: [{{ nbFoot }},{{ nbCourse }},{{ nbEquitation }},{{ nbvelo }},{{ nbRandonnee }},{{ nbAutre }}]
                        }
@@ -288,7 +305,7 @@
                options: {
                    title: {
                        display: true,
-                       text: 'Predicted world population (millions) in 2050'
+                       text: 'Sport'
                    }
                }
            });
@@ -299,7 +316,7 @@
                data: {
                    labels: ["Voiture","Covoiturage", "Vélo", "À pied", "Transport en commun"],
                    datasets: [{
-                       label: "Population (millions)",
+                       label: "Transport",
                        backgroundColor: ["#3e95cd","#000ea2", "#8e5ea2","#3cba9f","#e8c3b9"],
                        data: [{{ nbvoiture }},{{ nbCovoiturage }},{{ nbVelo }},{{ nbapied }},{{ nbapied }}]
                    }]
@@ -307,12 +324,11 @@
                options: {
                    title: {
                        display: true,
-                       text: 'Predicted world population (millions) in 2050'
+                       text: 'Tansport'
                    }
                }
            });
        </script>
-
        <script>
            var commune = [];
 

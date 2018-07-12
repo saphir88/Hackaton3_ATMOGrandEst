@@ -19,7 +19,7 @@ use App\Entity\Users;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-
+use App\Service\Mailer;
 
 
 
@@ -40,7 +40,7 @@ class MainController extends Controller
     /**
      * @Route("/accueil", name="accueil", methods={"GET", "POST"})
      */
-    public function AccueilAction(Request $request){
+    public function AccueilAction(Request $request,Mailer $mailer){
 
         $user = new Users();
 
@@ -89,6 +89,9 @@ class MainController extends Controller
             // Faire l'appel au serice mail ICI !!!!
 //            dump($_POST['form']["email"]);die;
             $user = $form->getData();
+
+            $mailer->sendEmail($_POST['form']['ville'],$_POST['form']['lieuTravail'],$_POST['form']['email']);
+
              $entityManager = $this->getDoctrine()->getManager();
              $entityManager->persist($user);
              $entityManager->flush();

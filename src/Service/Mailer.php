@@ -10,25 +10,43 @@ namespace App\Service;
 
 class Mailer {
 
-    public function sendEmail($name, \Swift_Mailer $mailer)
+    /**
+     * @var \Swift_Mailer
+     */
+    private $mailer;
+
+    /**
+     * @var Modèle du mail
+     */
+    private $templating;
+
+    /**
+     * Mailer constructor.
+     * @param \Swift_Mailer $mailer
+     * @param \Twig_Environment $templating
+     */
+    public function __construct(\Swift_Mailer $mailer, \Twig_Environment $templating)
     {
-        $message = (new \Swift_Message(''))
-            ->setFrom('send@example.com')
-            ->setTo('recipient@example.com')
-            ->setBody(
-                $this->renderView(
-                // templates/emails/registration.html.twig
-                    'emails/registration.html.twig',
-                    array('name' => $name)
-                ),
-                'text/html'
-            )
-        ;
-
-        $mailer->send($message);
-
-        return $this->render('');
+        $this->mailer = $mailer;
+        $this->templating = $templating;
     }
+    /**
+     * @Route("/email", name="email", methods="GET")
+     */
 
+    public function sendEmail($ville, $travail, $email)
+    {
+        $body = $this->templating->render('email.html.twig',[
+            'ville' => $ville,
+            'travail' => $travail,
+        ]);
+
+        $message = (new\Swift_Message('infocontact'))
+            ->setFrom($email)
+            ->setTo('axelfertinel@gmail.com')
+            ->setBody($body, 'text/html');
+
+        $this->mailer->send($message);
+    }
 }
 
