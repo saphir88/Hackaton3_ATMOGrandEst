@@ -4,68 +4,46 @@
     <section class="section1">
         <div class="container">
             <div class="row">
-                <div class="border col-5 ">
-                    <p>Api Weather</p>
-
-
-                    <form action="{{ path('accueil') }}" method="post">
-                        Cherchez une ville: <input type="text" name="ville" list="ville" autocomplete="off" onkeyup="showHint(this.value)">
-                        <input type="submit">
+                <div class="border col-6">
+                    <form class="mt-3" action="{{ path('accueil') }}" method="post">
+                        <p>Entrez une ville de la région Grand Est</p>
+                        <input type="text" name="ville" list="ville" autocomplete="off" onkeyup="showHint(this.value)">
+                        <input class="btn-info" type="submit">
                     </form>
-                    <datalist id="ville">
-                    </datalist>
+
+                    <datalist id="ville"></datalist>
+
                     {% if open is not empty %}
-                        <br>
-                        <p><strong>{{ open.location.name }}</strong></p>
-                        <div class="row">
+
+                        <div class="row mt-2">
+                            <h3 class="text-center">Actuellement à {{ open.location.name }}</h3>
+                            {% if donnees is not empty %}
+                                <p>Dioxyde d'azote (NO2): {{ donnees.indiceno2 }}</p>
+                                <p>Ozone (O3): {{ donnees.indiceo3 }}</p>
+                                <p>Particules fines (PM10): {{ donnees.indicepm10 }}</p>
+                                <p>Qualité de l'air: {{ donnees.qualiteair }}</p>
+                            {% endif %}
+                            {% else %}
+                                <p style="height: 200px;"></p>
+                            {% endif %}
                             <div class="col-6">
-                                <h4>Météo actuelle:</h4>
-                                <img src="{{ open.current.condition.icon }}" style="float: left">
+                                <img src="{{ open.current.condition.icon }}">
                                 <p>{{ open.current.condition.text }}</p>
                                 <p>{{ open.current.temp_c }}°C</p>
                             </div>
                             <div class="col-6">
-                                <h4>Prévision: </h4>
+                                <h4>Prévisions</h4>
                                 {% for forecast in open.forecast.forecastday %}
-                                    <img src="{{ forecast.day.condition.icon }}" style="float: left">
-                                    <p>min: {{ forecast.day.mintemp_c }}°C</p>
-                                    <p>max: {{ forecast.day.maxtemp_c }}°C</p>
+                                    <img src="{{ forecast.day.condition.icon }}">
                                     <p>{{ forecast.day.condition.text }}</p>
-
+                                    <p>Minimales {{ forecast.day.mintemp_c }}°C</p>
+                                    <p>Maximales {{ forecast.day.maxtemp_c }}°C</p>
                                 {% endfor %}
                             </div>
                         </div>
-                        {% if donnees is not empty %}
-                            <p>Taux protoxyde d'azote (N2O): {{ donnees.indiceno2 }}</p>
-                            <p>Ozone (O3): {{ donnees.indiceo3 }}</p>
-                            <p>Particules fines (PM10): {{ donnees.indicepm10 }}</p>
-                            <p>Qualité de l'air: {{ donnees.qualiteair }}</p>
-                        {% endif %}
-                    {% else %}
-                        <p style="height: 200px;"></p>
-                    {% endif %}
-                </div>
-                <div id="map" class="border col-6 offset-1"></div>
-                <div id="infowindow-content">
-                    <span id="place-name"  class="title"></span><br>
-                    Place ID <span id="place-id"></span><br>
-                    <span id="place-address"></span>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <section class="section2">
-        <div class="container">
-            <div class="row">
-                <div class="border col-12">
-                    <p>Recommandations</p>
-                    <p>Personnes agées : Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                    <p>Asmathiques : Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                    <p> Enfants en bas âge : Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                    <p> Activités extérieures / jogging : Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                    <p>Activités extérieures / jogging :Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                 </div>
+                <div id="map" class="border col-6"></div>
             </div>
         </div>
     </section>
@@ -74,7 +52,7 @@
         <div class="container">
             <div class="row">
                 <div class="border col-12">
-                    <p>Stat</p>
+                    <p>Tranches d'âge</p>
                     <canvas id="myChart" width="200" height="100"></canvas>
                 </div>
             </div>
@@ -84,7 +62,7 @@
         <div class="container">
             <div class="row">
                 <div class="border col-12">
-                    <p>Sports</p>
+                    <p>Sports en plein air</p>
                     <canvas id="doughnut-chart"></canvas>
                 </div>
             </div>
@@ -94,7 +72,7 @@
         <div class="container">
             <div class="row">
                 <div class="border col-12">
-                    <p>Transport</p>
+                    <p>Moyens de transport</p>
                     <canvas id="pie-chart"></canvas>
                 </div>
             </div>
@@ -220,10 +198,9 @@
            var myChart = new Chart(ctx, {
                type: 'bar',
                data: {
-                   labels: ["Homme:18/25", "Femme:18/25","Homme:25/35","Femme: 25/35","Homme: 35/55","Femme: 35/55",
-                       "Homme: 55/70", "Femme:55/70", "Homme:70+","Femme:70+"],
+                   labels: ["Hommes: 18 à 25 ans","Femmes: 18 à 25 ans","Hommes: 25 à 35 ans","Femmes: 25 à 35 ans","Hommes: 35 à 55 ans","Femmes: 35 à 55 ans","Hommes: 55 à 70 ans","Femmes: 55 à 70 ans","Hommes: Plus de 70 ans","Femmes: Plus de 70 ans    "],
                    datasets: [{
-                       label: 'All',
+                       label: 'Nombre',
                        data: [ {{ nbhommes1825 }},{{ nbfemmes1825 }}, {{ nbhommes2535 }}, {{ nbfemmes2535 }},  {{ nbhommes3555 }},  {{ nbfemmes3555 }},  {{ nbhommes5570 }},{{ nbfemmes5570 }}, {{ nbhommes70 }},{{ nbfemmes70 }}],
                        backgroundColor: [
                            'rgba(54, 162, 235, 0.2)',
@@ -268,10 +245,10 @@
            new Chart(document.getElementById("doughnut-chart"), {
                type: 'doughnut',
                data: {
-                   labels: ["Foot", "Course", "Equitation", "Velo", "Randonnée","Autre"],
+                   labels: ["Football", "Course à pied", "Équitation", "Vélo", "Randonnée", "Autre"],
                    datasets: [
                        {
-                           label: "Population (millions)",
+                           label: "Sports",
                            backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850","#c40850"],
                            data: [{{ nbFoot }},{{ nbCourse }},{{ nbEquitation }},{{ nbvelo }},{{ nbRandonnee }},{{ nbAutre }}]
                        }
@@ -280,7 +257,7 @@
                options: {
                    title: {
                        display: true,
-                       text: 'Predicted world population (millions) in 2050'
+                       text: 'Répartition des différents sports de plein-air'
                    }
                }
            });
@@ -289,9 +266,9 @@
            new Chart(document.getElementById("pie-chart"), {
                type: 'pie',
                data: {
-                   labels: ["Voiture","Covoiturage", "Vélo", "À pied", "Transport en commun"],
+                   labels: ["Voiture", "Covoiturage", "Vélo", "À pied", "Transports en commun"],
                    datasets: [{
-                       label: "Population (millions)",
+                       label: "Moyens de transport",
                        backgroundColor: ["#3e95cd","#000ea2", "#8e5ea2","#3cba9f","#e8c3b9"],
                        data: [{{ nbvoiture }},{{ nbCovoiturage }},{{ nbVelo }},{{ nbapied }},{{ nbapied }}]
                    }]
@@ -299,7 +276,7 @@
                options: {
                    title: {
                        display: true,
-                       text: 'Predicted world population (millions) in 2050'
+                       text: 'Répartition des différents moyens de transport'
                    }
                }
            });
