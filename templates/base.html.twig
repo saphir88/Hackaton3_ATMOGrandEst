@@ -15,9 +15,7 @@
             </div>
         </header>
         {% block body %}
-            {{ form_start(form) }}
-            {{ form_widget(form) }}
-            {{ form_end(form) }}
+
         {% endblock %}
         {% block javascripts %}
             <script src="{{ asset('build/js/app.js') }}"></script>
