@@ -30,6 +30,10 @@ class MainController extends Controller
      * @Route("/accueil", name="accueil", methods={"GET", "POST"})
      */
     public function AccueilAction(){
-        return $this->render('accueil/accueil.html.twig');
+
+        $test= 850;
+        return $this->render('accueil/accueil.html.twig',array(
+            'test' => $test,
+    ));
     }
 }
