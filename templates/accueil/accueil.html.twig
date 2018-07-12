@@ -94,9 +94,9 @@
     <section class="section3">
         <div class="container">
             <div class="row">
-                <div class="border col-12">
+                <div class="border col-8 offset-2">
                     <p>Stat</p>
-                    <canvas id="myChart" width="200" height="100"></canvas>
+                    <canvas id="myChart"></canvas>
                 </div>
             </div>
         </div>
@@ -104,24 +104,16 @@
     <section class="section3">
         <div class="container">
             <div class="row">
-                <div class="border col-12">
-                    <p>Sport</p>
+                <div class="border col-6">
                     <canvas id="doughnut-chart"></canvas>
                 </div>
-            </div>
-        </div>
-    </section>
-    <section class="section3">
-        <div class="container">
-            <div class="row">
-                <div class="border col-12">
-                    <p>Transport</p>
+                <div class="border col-6 ">
                     <canvas id="pie-chart"></canvas>
                 </div>
             </div>
         </div>
     </section>
-
+    
     <section class="section4">
         <div class="container">
             <div class="row">
@@ -292,7 +284,7 @@
                    labels: ["Foot", "Course", "Equitation", "Velo", "Randonnée","Autre"],
                    datasets: [
                        {
-                           label: "Population (millions)",
+                           label: "Sport",
                            backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850","#c40850"],
                            data: [{{ nbFoot }},{{ nbCourse }},{{ nbEquitation }},{{ nbvelo }},{{ nbRandonnee }},{{ nbAutre }}]
                        }
@@ -301,7 +293,7 @@
                options: {
                    title: {
                        display: true,
-                       text: 'Predicted world population (millions) in 2050'
+                       text: 'Sport'
                    }
                }
            });
@@ -312,7 +304,7 @@
                data: {
                    labels: ["Voiture","Covoiturage", "Vélo", "À pied", "Transport en commun"],
                    datasets: [{
-                       label: "Population (millions)",
+                       label: "Transport",
                        backgroundColor: ["#3e95cd","#000ea2", "#8e5ea2","#3cba9f","#e8c3b9"],
                        data: [{{ nbvoiture }},{{ nbCovoiturage }},{{ nbVelo }},{{ nbapied }},{{ nbapied }}]
                    }]
@@ -320,7 +312,7 @@
                options: {
                    title: {
                        display: true,
-                       text: 'Predicted world population (millions) in 2050'
+                       text: 'Tansport'
                    }
                }
            });
