@@ -44,6 +44,8 @@ class MainController extends Controller
 
         $user = new Users();
 
+
+
         $form = $this->createFormBuilder($user)
             ->add('email', TextType::class)
             ->add('ville', TextType::class)
@@ -89,9 +91,160 @@ class MainController extends Controller
              $entityManager = $this->getDoctrine()->getManager();
              $entityManager->persist($user);
              $entityManager->flush();
+
+             $this->redirectToRoute('accueil');
         }
+
+        $hommes1825 = $this->getDoctrine()->getManager()
+            ->getRepository(Users::class)->findby(
+                ['genre' => 'Homme', 'trancheAge'=>'18/25']
+            );
+        $nbhommes1825 = count($hommes1825);
+
+        $hommes2535 = $this->getDoctrine()->getManager()
+            ->getRepository(Users::class)->findby(
+                ['genre' => 'Homme', 'trancheAge'=>'25/35']
+            );
+        $nbhommes2535 = count($hommes2535);
+
+        $hommes3555 = $this->getDoctrine()->getManager()
+            ->getRepository(Users::class)->findby(
+                ['genre' => 'Homme', 'trancheAge'=>'35/55']
+            );
+        $nbhommes3555 = count($hommes3555);
+
+        $hommes5570 = $this->getDoctrine()->getManager()
+            ->getRepository(Users::class)->findby(
+                ['genre' => 'Homme', 'trancheAge'=>'55/70']
+            );
+        $nbhommes5570 = count($hommes5570);
+
+        $hommes70 = $this->getDoctrine()->getManager()
+            ->getRepository(Users::class)->findby(
+                ['genre' => 'Homme', 'trancheAge'=>'70+']
+            );
+        $nbhommes70 = count($hommes70);
+
+
+        $femmes1825 = $this->getDoctrine()->getManager()
+            ->getRepository(Users::class)->findby(
+                ['genre' => 'Femme', 'trancheAge'=>'18/25']
+            );
+        $nbfemmes1825 = count($femmes1825);
+
+        $femmes2535 = $this->getDoctrine()->getManager()
+            ->getRepository(Users::class)->findby(
+                ['genre' => 'Femme', 'trancheAge'=>'25/35']
+            );
+        $nbfemmes2535 = count($femmes2535);
+
+        $femmes3555 = $this->getDoctrine()->getManager()
+            ->getRepository(Users::class)->findby(
+                ['genre' => 'Femme', 'trancheAge'=>'35/55']
+            );
+        $nbfemmes3555 = count($femmes3555);
+
+        $femmes5570 = $this->getDoctrine()->getManager()
+            ->getRepository(Users::class)->findby(
+                ['genre' => 'Femme', 'trancheAge'=>'55/70']
+            );
+        $nbfemmes5570 = count($femmes5570);
+
+        $femmes70 = $this->getDoctrine()->getManager()
+            ->getRepository(Users::class)->findby(
+                ['genre' => 'Femme', 'trancheAge'=>'70+']
+            );
+        $nbfemmes70 = count($femmes70);
+
+        $foot = $this->getDoctrine()->getManager()
+            ->getRepository(Users::class)->findby(
+                ['activite' => 'Foot']
+            );
+        $nbFoot = count($foot);
+
+        $course = $this->getDoctrine()->getManager()
+            ->getRepository(Users::class)->findby(
+                ['activite' => 'Course']
+            );
+        $nbCourse = count($course);
+
+        $velo = $this->getDoctrine()->getManager()
+            ->getRepository(Users::class)->findby(
+                ['activite' => 'Velo']
+            );
+        $nbvelo = count($velo);
+
+        $equitation = $this->getDoctrine()->getManager()
+            ->getRepository(Users::class)->findby(
+                ['activite' => 'Equitation']
+            );
+        $nbEquitation = count($equitation);
+
+        $randonnée = $this->getDoctrine()->getManager()
+            ->getRepository(Users::class)->findby(
+                ['activite' => 'Randonnée']
+            );
+        $nbRandonnée = count($randonnée);
+
+        $autre = $this->getDoctrine()->getManager()
+            ->getRepository(Users::class)->findby(
+                ['activite' => 'Autre']
+            );
+        $nbAutre = count($autre);
+
+        $velo = $this->getDoctrine()->getManager()
+            ->getRepository(Users::class)->findby(
+                ['moyenTransport' => 'Velo']
+            );
+        $nbVelo = count($velo);
+
+        $voiture = $this->getDoctrine()->getManager()
+            ->getRepository(Users::class)->findby(
+                ['moyenTransport' => 'Voiture']
+            );
+        $nbvoiture = count($voiture);
+
+        $Covoiturage = $this->getDoctrine()->getManager()
+            ->getRepository(Users::class)->findby(
+                ['moyenTransport' => 'Covoiturage']
+            );
+        $nbCovoiturage = count($Covoiturage);
+
+        $apied = $this->getDoctrine()->getManager()
+            ->getRepository(Users::class)->findby(
+                ['moyenTransport' => 'A pied']
+            );
+        $nbapied = count($apied);
+
+        $transport = $this->getDoctrine()->getManager()
+            ->getRepository(Users::class)->findby(
+                ['moyenTransport' => 'Transport en commun']
+            );
+        $nbtransport = count($transport);
+
         return $this->render('accueil/accueil.html.twig', array(
             'form' => $form->createView(),
+            'nbhommes1825'=>$nbhommes1825,
+            'nbhommes2535'=>$nbhommes2535,
+            'nbhommes3555'=>$nbhommes3555,
+            'nbhommes5570'=>$nbhommes5570,
+            'nbhommes70'=>$nbhommes70,
+            'nbfemmes1825'=>$nbfemmes1825,
+            'nbfemmes2535'=>$nbfemmes2535,
+            'nbfemmes3555'=>$nbfemmes3555,
+            'nbfemmes5570'=>$nbfemmes5570,
+            'nbfemmes70'=>$nbfemmes70,
+            'nbVelo'=>$nbVelo,
+            'nbvoiture'=>$nbvoiture,
+            'nbCovoiturage'=>$nbCovoiturage,
+            'nbapied'=>$nbapied,
+            'nbtransport'=>$nbtransport,
+            'nbFoot'=>$nbFoot,
+            'nbCourse'=>$nbCourse,
+            'nbvelo'=>$nbvelo,
+            'nbEquitation'=>$nbEquitation,
+            'nbRandonnee'=>$nbRandonnée,
+            'nbAutre'=>$nbAutre,
         ));
     }
 
