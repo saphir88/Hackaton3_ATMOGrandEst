@@ -92,7 +92,7 @@
             </div>
         </div>
     </section>
-    
+
     <section class="section4">
         <div class="container">
             <div class="row">
@@ -215,7 +215,7 @@
                    labels: ["Homme:18/25", "Femme:18/25","Homme:25/35","Femme: 25/35","Homme: 35/55","Femme: 35/55",
                        "Homme: 55/70", "Femme:55/70", "Homme:70+","Femme:70+"],
                    datasets: [{
-                       label: 'All',
+                       label: 'Tout',
                        data: [ {{ nbhommes1825 }},{{ nbfemmes1825 }}, {{ nbhommes2535 }}, {{ nbfemmes2535 }},  {{ nbhommes3555 }},  {{ nbfemmes3555 }},  {{ nbhommes5570 }},{{ nbfemmes5570 }}, {{ nbhommes70 }},{{ nbfemmes70 }}],
                        backgroundColor: [
                            'rgba(54, 162, 235, 0.2)',
@@ -252,6 +252,10 @@
                                beginAtZero:true
                            }
                        }]
+                   },
+                   title: {
+                       display: true,
+                       text: 'Personne'
                    }
                }
            });
@@ -296,7 +300,6 @@
                }
            });
        </script>
-
        <script>
            var commune = [];
 
