@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}ATMO Grand Est{% endblock %}</title>
         {% block stylesheets %}
             <link href="{{ asset('build/css/app.css') }}" rel="stylesheet" />
         {% endblock %}
@@ -14,7 +14,11 @@
                 <div class="border titre align-middle col-8"><h1>Respirez, Inspirez, Sensibilisez !</h1></div>
             </div>
         </header>
-        {% block body %}{% endblock %}
+        {% block body %}
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            {{ form_end(form) }}
+        {% endblock %}
         {% block javascripts %}
             <script src="{{ asset('build/js/app.js') }}"></script>
         {% endblock %}
