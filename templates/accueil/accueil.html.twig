@@ -51,6 +51,17 @@
         <div class="container">
             <div class="row">
                 <div class="border col-12">
+                    <p>Stat</p>
+                    <canvas id="myChart" width="200" height="100"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section4">
+        <div class="container">
+            <div class="row">
+                <div class="border col-12">
                     <p>News Letter</p>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                     <div class="container">
@@ -122,19 +133,7 @@
         </div>
     </section>
 
-    <section class="section4">
-        <div class="container">
-            <div class="row">
-                <div class="border col-12">
-                    <p>Stat</p>
-                    <form method="POST" type="">
-                        <input placeholder="Recherche une ville">
-                        <button type="submit">Envoyer</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
+
 
     <style>
         .border{
@@ -156,3 +155,62 @@
         }
     </style>
 {% endblock %}
+   {% block javascripts %}
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+
+       <script>
+
+           var ctx = document.getElementById("myChart");
+           var myChart = new Chart(ctx, {
+               type: 'bar',
+               data: {
+                   labels: ["Homme:18/25", "Femme:18/25","Homme:25/35","Femme: 25/35","Homme: 35/55","Femme: 35/55",
+                       "Homme: 55/70", "Femme:55/70", "Homme:70+","Femme:70+"],
+                   datasets: [{
+                       label: 'All',
+                       data: [{{ test }},50, 19, 50, 5, 2, 3,40,90,30],
+                       backgroundColor: [
+                           'rgba(54, 162, 235, 0.2)',
+                           'rgba(255, 99, 132, 0.2)',
+                           'rgba(54, 162, 235, 0.2)',
+                           'rgba(255, 99, 132, 0.2)',
+                           'rgba(54, 162, 235, 0.2)',
+                           'rgba(255, 99, 132, 0.2)',
+                           'rgba(54, 162, 235, 0.2)',
+                           'rgba(255, 99, 132, 0.2)',
+                           'rgba(54, 162, 235, 0.2)',
+                           'rgba(255, 99, 132, 0.2)',
+                       ],
+
+                       borderColor: [
+                           'rgba(54, 162, 235, 1)',
+                           'rgba(255,99,132,1)',
+                           'rgba(54, 162, 235, 1)',
+                           'rgba(255,99,132,1)',
+                           'rgba(54, 162, 235, 1)',
+                           'rgba(255,99,132,1)',
+                           'rgba(54, 162, 235, 1)',
+                           'rgba(255,99,132,1)',
+                           'rgba(54, 162, 235, 1)',
+                           'rgba(255,99,132,1)',
+                       ],
+                       borderWidth: 1
+                   }]
+               },
+               options: {
+                   scales: {
+                       yAxes: [{
+                           ticks: {
+                               beginAtZero:true
+                           }
+                       }]
+                   }
+               }
+           });
+
+
+       </script>
+   {% endblock %}
