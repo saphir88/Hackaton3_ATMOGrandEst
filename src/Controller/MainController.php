@@ -126,8 +126,9 @@ class MainController extends Controller
             return new Response($hint);
         }
 
-        if (!empty($_POST)) {
+        if (isset($_POST['ville'])) {
             $ville = $_POST['ville'];
+
             $donnees = $this->getDoctrine()->getManager()
                 ->getRepository(Info::class)->findOneBy(['commune'=>$ville]);
 
@@ -334,6 +335,7 @@ class MainController extends Controller
         }
 
         if (!empty($_POST)) {
+            dump($_POST);die;
             $ville = $_POST['ville'];
             $api = 'https://api.apixu.com/v1/forecast.json?key=ea49c70579214bf1b16204559181107&q=' . $ville . '&lang=fr';
             $response = file_get_contents($api);
