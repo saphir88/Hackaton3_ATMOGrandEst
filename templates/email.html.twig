@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}<h1>Prévisions du jour</h1>{% endblock %}
+
+{% block body %}
+
+{% if info.qualiteAir == 'Bonne' %}
+    <body background="/public/images/mail-bon.jpg">
+    <h2>Bonjour !</h2>
+
+    <p>Voici les caractéristiques actuelles de la qualité de l'air et quelques recommandations.</p>
+
+    <div id="bloc__air container">
+        <h3>Les indices de pollution dans votre ville:</h3>
+        <strong>{{ users.ville }}</strong>
+        <div class="row">
+            <h4 class="bloc__titre col-6">Dioxyde d'azote: {{ info.indiceNO2 }}</h4>
+            <h4 class="bloc__titre col-6">Ozone: {{ info.indiceO3 }}</h4>
+        </div>
+        <div class="row">
+            <h4 class="bloc__titre col-6">Particules fines: {{ info.indicePM10 }}</h4>
+            <h4 class="bloc__titre col-6">Dioxyde de soufre: {{ info.indiceSO2 }}</h4>
+        </div>
+    </div>
+
+    <div id="bloc__meteo">
+        <h3>La météo actuelle:</h3>
+        <h4>Conditions:</h4>
+        <h4></h4>
+    </div>
+
+    {% if users.lieu_travail is defined %}
+        <div id="bloc__air">
+            <h3>Les indices de pollution sur votre lieu de travail:</h3>
+            <strong>{{ users.lieuTravail }}</strong>
+            <h4>Dioxyde d'azote: {{ info.indiceNO2 }}</h4>
+            <h4>Ozone: {{ info.indiceO3 }}</h4>
+            <h4>Particules fines: {{ info.indicePM10 }}</h4>
+            <h4>Dioxyde de soufre: {{ info.indiceSO2 }}</h4>
+        </div>
+    {% endif %}
+
+    <p>La qualité de l'air étant bonne, vous pouvez vous rendre sur votre lieu de travail en voiture, mais privilégiez au maximum le co-voiturage et les transports en commun.</p>
+    </body>
+{% endif %}
+
+{% endblock %}
