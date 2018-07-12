@@ -54,21 +54,42 @@
             </div>
         </div>
     </section>
-
+    {% if donnees is not empty %}
     <section class="section2">
         <div class="container">
             <div class="row">
                 <div class="border col-12">
-                    <p>Recommandations</p>
-                    <p>Personnes agées : Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                    <p>Asmathiques : Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                    <p> Enfants en bas âge : Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                    <p> Activités extérieures / jogging : Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                    <p>Activités extérieures / jogging :Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        {% if donnees.qualiteAir == "Bonne" %}
+                            <p>Recommandations</p>
+                            <p>Personnes agées : Bonne</p>
+                            <p>Enfants en bas âge : Bonne</p>
+                            <p>Asmathiques : Bonne</p>
+                            <p>Activités extérieures / jogging : Bonne</p>
+                        {% elseif donnees.qualiteAir == "Moyenne" %}
+                            <p>Recommandations</p>
+                            <p>Personnes agées : Moyenne</p>
+                            <p>Enfants en bas âge : Moyenne</p>
+                            <p>Asmathiques : Moyenne</p>
+                            <p>Activités extérieures / jogging : Moyenne</p>
+                        {% elseif donnees.qualiteAir == "Médiocre" %}
+                            <p>Recommandations</p>
+                            <p>Personnes agées : Médiocre</p>
+                            <p>Enfants en bas âge : Médiocre</p>
+                            <p>Asmathiques : Médiocre</p>
+                            <p>Activités extérieures / jogging : Médiocre</p>
+                        {% else %}
+                            <p>Recommandations</p>
+                            <p>Personnes agées : Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <p>Asmathiques : Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <p>Enfants en bas âge : Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <p>Activités extérieures / jogging : Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <p>Activités extérieures / jogging :Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        {% endif %}
                 </div>
             </div>
         </div>
     </section>
+    {% endif %}
 
     <section class="section3">
         <div class="container">
