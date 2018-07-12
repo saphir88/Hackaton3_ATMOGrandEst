@@ -3,8 +3,38 @@
 {% block title %}Welcome!{% endblock %}
 
 {% block body %}
-    <form>
-        Cherchez une ville: <input type="text" list="ville" onkeyup="showHint(this.value)">
+    <br>
+    <br>
+    {% if open is not empty %}
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-5">
+                    Météo actuelle:
+                    <p>{{ open.location.name }}</p>
+                    <p>{{ open.current.condition.text }}</p>
+
+                    <img src="{{ open.current.condition.icon }}" style="width: 100px">
+                    <p style="font-size: 1em; z-index: 1">{{ open.current.temp_c }}°C</p>
+                    <p>Derniere mise à jour : {{ open.current.last_updated|date('d-m-Y H:i') }}</p>
+                </div>
+                <br>
+                <br>
+                <div class="col-5 col-offset-1">
+                    <p>Prévision pour la journée :</p>
+                    {% for forecast in open.forecast.forecastday %}
+                        <p>Temp min: {{ forecast.day.mintemp_c }}</p>
+                        <p>Temp max: {{ forecast.day.maxtemp_c }}</p>
+                        <p>{{ forecast.day.condition.text }}</p>
+                        <img src="{{ forecast.day.condition.icon }}">
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+    {% endif %}
+    <form action="{{ path('test_index') }}" method="post">
+        Cherchez une ville: <input type="text" name="ville" list="ville" autocomplete="off" onkeyup="showHint(this.value)">
+        <input type="submit">
     </form>
 
     <datalist id="ville">
