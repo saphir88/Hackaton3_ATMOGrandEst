@@ -85,12 +85,14 @@ class MainController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $form->getData();
-
-            // Faire l'appel au serice mail ICI !!!!
-//            dump($_POST['form']["email"]);die;
             $user = $form->getData();
 
-            $mailer->sendEmail($_POST['form']['ville'],$_POST['form']['lieuTravail'],$_POST['form']['email']);
+            $donnees = $this->getDoctrine()->getManager()
+                ->getRepository(Info::class)->findOneBy(['commune'=>$_POST['form']['ville']]);
+
+            $donneesTravail = $this->getDoctrine()->getManager()
+                ->getRepository(Info::class)->findOneBy(['commune'=>$_POST['form']['lieutravail']]);
+            $mailer->sendEmail($_POST['form']['ville'],$_POST['form']['lieutravail'],$_POST['form']['email'],$donnees,$donneesTravail);
 
              $entityManager = $this->getDoctrine()->getManager();
              $entityManager->persist($user);
@@ -98,6 +100,7 @@ class MainController extends Controller
 
              $this->redirectToRoute('accueil');
         }
+
         /* METEO */
 
         $commune = $this->getDoctrine()->getManager()

@@ -8,6 +8,9 @@
 
 namespace App\Service;
 
+use App\Entity\Info;
+use Doctrine\ORM\EntityManager;
+
 class Mailer {
 
     /**
@@ -34,16 +37,27 @@ class Mailer {
      * @Route("/email", name="email", methods="GET")
      */
 
-    public function sendEmail($ville, $travail, $email)
+    public function sendEmail($ville, $travail, $email,$donnees, $donneesTravail)
     {
+
+        $apiTravail = 'https://api.apixu.com/v1/forecast.json?key=ea49c70579214bf1b16204559181107&q=' . $travail . '&lang=fr';
+        $responseTravail = file_get_contents($apiTravail);
+        $jsontravail = json_decode($responseTravail);
+
+        $api = 'https://api.apixu.com/v1/forecast.json?key=ea49c70579214bf1b16204559181107&q=' . $ville . '&lang=fr';
+        $response = file_get_contents($api);
+        $jsonobj = json_decode($response);
+
         $body = $this->templating->render('email.html.twig',[
-            'ville' => $ville,
-            'travail' => $travail,
+            'open' => $jsonobj,
+            'donneesTravail' => $donneesTravail,
+            'opentravail' => $jsontravail,
+            'donnees' => $donnees
         ]);
 
         $message = (new\Swift_Message('infocontact'))
-            ->setFrom($email)
-            ->setTo('axelfertinel@gmail.com')
+            ->setFrom('axelfertinel@gmail.com')
+            ->setTo($email)
             ->setBody($body, 'text/html');
 
         $this->mailer->send($message);
