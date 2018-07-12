@@ -55,10 +55,10 @@
         </div>
     </section>
     {% if donnees is not empty %}
-    <section class="section2">
-        <div class="container">
-            <div class="row">
-                <div class="border col-12">
+        <section class="section2">
+            <div class="container">
+                <div class="row">
+                    <div class="border col-12">
                         {% if donnees.qualiteAir == "Bonne" %}
                             <p>Recommandations</p>
                             <p>Personnes agées : Bonne</p>
@@ -85,10 +85,10 @@
                             <p>Activités extérieures / jogging : Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                             <p>Activités extérieures / jogging :Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                         {% endif %}
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
     {% endif %}
 
     <section class="section3">
@@ -114,6 +114,13 @@
         </div>
     </section>
 
+
+
+
+
+
+
+
     <section class="section4">
         <div class="container">
             <div class="row">
@@ -122,18 +129,53 @@
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                     <div class="container">
                         <div class="row">
-                            <div class="border col-5 offset-3">
+                            <div class="border col-6 offset-3">
                                 {{ form_start(form) }}
-                                {{ form_row(form.email) }}
-                                {{ form_row(form.ville, { 'attr': {'autocomplete': 'off','list':'ville', 'onkeyup':'showHint(this.value)'} }) }}
-                                {{ form_row(form.lieutravail, { 'attr': {'autocomplete': 'off','list':'ville', 'onkeyup':'showHint(this.value)'} }) }}
-                                {{ form_row(form.genre) }}
-                                {{ form_row(form.trancheAge) }}
-                                {{ form_row(form.activite) }}
-                                {{ form_row(form.moyenTransport) }}
-                                {{ form_rest(form) }}
-                                {{ form_end(form) }}
+                                <div class="text-center w-100">
+                                    {{ form_label(form.email) }}
+                                    {{ form_widget(form.email) }}
+                                </div>
 
+                                <br>
+
+                                <div class="row">
+                                    <div class="col-6">
+                                        {{ form_row(form.ville, { 'attr': {'autocomplete': 'off','list':'ville', 'onkeyup':'showHint(this.value)'} }) }}
+                                    </div>
+                                    <div class="col-6">
+                                        {{ form_row(form.lieutravail, { 'attr': {'autocomplete': 'off','list':'ville', 'onkeyup':'showHint(this.value)'} }) }}
+                                    </div>
+                                </div>
+                                <br>
+
+                                <div class="row">
+                                    <div class="col-6">
+                                        {{ form_label(form.genre) }}
+                                        {{ form_widget(form.genre) }}
+                                    </div>
+
+                                    <div class="col-6">
+                                        {{ form_label(form.trancheAge) }}
+                                        {{ form_widget(form.trancheAge) }}
+                                    </div>
+                                </div>
+                                <br>
+
+                                <div class="row">
+                                    <div class="col-6">
+                                        {{ form_label(form.activite) }}
+                                        {{ form_widget(form.activite) }}
+                                    </div>
+
+                                    <div class="col-6">
+                                        {{ form_label(form.moyenTransport) }}
+                                        {{ form_widget(form.moyenTransport) }}
+                                    </div>
+                                </div>
+                                <br>
+                                <input type="submit" class="btn btn-primary">
+                                {{ form_end(form) }}
+                                <br>
                             </div>
                         </div>
                     </div>
