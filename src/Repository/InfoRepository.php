@@ -18,4 +18,15 @@ class InfoRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Info::class);
     }
+    public function commune() {
+
+        $query = $this->createQueryBuilder('i')
+            ->select('i.commune')
+            ->where('i.echeance = :echeance')
+            ->setParameter('echeance', '0')
+            ->getQuery();
+
+        return $query;
+    }
+
 }
