@@ -89,12 +89,12 @@ class MainController extends Controller
             // Faire l'appel au serice mail ICI !!!!
 //            dump($_POST['form']["email"]);die;
             $user = $form->getData();
+            $entityManager = $this->getDoctrine()->getManager();
 
-            $mailer->sendEmail($_POST['form']['ville'],$_POST['form']['lieuTravail'],$_POST['form']['email']);
+            $mailer->sendEmail($_POST['form']['ville'],$_POST['form']['lieutravail'],$_POST['form']['email']);
 
-             $entityManager = $this->getDoctrine()->getManager();
-             $entityManager->persist($user);
-             $entityManager->flush();
+            $entityManager->persist($user);
+            $entityManager->flush();
 
              $this->redirectToRoute('accueil');
         }
