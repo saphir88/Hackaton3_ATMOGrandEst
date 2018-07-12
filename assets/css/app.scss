@@ -7,6 +7,17 @@ $gris: #4d4d4d;
   border: 1px solid black;
 }
 
-.titre {
-  text-align: center;
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  padding-top: 3vh;
+  padding-bottom: 3vh;
 }
+
+.header img{
+  width: 120px;
+  height: auto;
+}
+
