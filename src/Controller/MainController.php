@@ -27,7 +27,7 @@ class MainController extends Controller
         return $this->render('base.html.twig');
     }
     /**
-     * @Route("/accueil", name="accueil", methods="GET")
+     * @Route("/accueil", name="accueil", methods={"GET", "POST"})
      */
     public function AccueilAction(){
         return $this->render('accueil/accueil.html.twig');
