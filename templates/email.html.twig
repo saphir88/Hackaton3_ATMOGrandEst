@@ -1,92 +1,107 @@
-{% block stylesheets %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
     <link rel="stylesheet" href="{{ asset('build/css/email.css') }}">
-{% endblock %}
+</head>
+<body>
+<div class="container">
 
-{% block body %}
+    {% if donnees.qualiteair == 'Bonne' %}
+    <body background="/public/images/mail-bon.jpg">
+    {% endif %}
 
-    <div class="container">
+    {% if donnees.qualiteair == 'Moyenne' %}
+    <body background="/public/images/mail-bon.jpg">
+    {% endif %}
 
-        {#    {% if info.qualiteAir == 'Bonne' %}
-            <body background="/public/images/mail-bon.jpg">
-            {% endif %}#}
+    {% if donnees.qualiteair == 'Médiocre' %}
+    <body background="/public/images/mail-bon.jpg">
+    {% endif %}
 
-        {% block title %}<h1>Prévisions du jour</h1>{% endblock %}
+    {% block title %}<h1>Prévisions du jour</h1>{% endblock %}
 
-        <h2>Bonjour !</h2>
+    <h2>Bonjour !</h2>
 
-        <p>Voici les caractéristiques quotidiennes de la qualité de l'air et quelques recommandations.</p>
+    <p>Voici les caractéristiques quotidiennes de la qualité de l'air et quelques recommandations.</p>
 
-        <div id="bloc__air" class="container">
+    <div id="bloc__air" class="container">
 
+        <div class="row">
+            <h3 class="mb-4">Les indices de pollution dans votre ville</h3>
+            <h4 class="mb-2">{{ open.location.name }}</h4>
             <div class="row">
-                    <h3 class="mb-4">Les indices de pollution dans votre ville</h3>
-                    <h4 class="mb-2">LA VILLE</h4>
-                    <div class="row">
-                        <h4 class="bloc__titre col-6">Dioxyde d'azote: INDICE NO2</h4>
-                        <h4 class="bloc__titre col-6">Ozone: INDICE O2</h4>
-                    </div>
-                    <div class="row">
-                        <h4 class="bloc__titre col-6">Particules fines: INDICE PM10</h4>
-                        <h4 class="bloc__titre col-6">Dioxyde de soufre: INDICE SO2</h4>
-                    </div>
-                </div>
-
-                {% if users.lieu_travail is defined %}
-                    <div class="col">
-                        <h3 class="mb-4">Les indices de pollution sur votre lieu de travail</h3>
-                        <h4 class="mb-2">LE LIEU DE TRAVAIL</h4>
-                        <div class="row">
-                            <h4 class="bloc__titre col-6">Dioxyde d'azote: INDICE NO2</h4>
-                            <h4 class="bloc__titre col-6">Ozone: INDICE O2</h4>
-                        </div>
-                        <div class="row">
-                            <h4 class="bloc__titre col-6">Particules fines: INDICE PM10</h4>
-                            <h4 class="bloc__titre col-6">Dioxyde de soufre: INDICE SO2</h4>
-                        </div>
-                    </div>
-                {% endif %}
+                <h4 class="bloc__titre col-6">Dioxyde d'azote: {{ donnees.indiceno2 }}</h4>
+                <h4 class="bloc__titre col-6">Ozone: {{ donnees.indiceo3 }}</h4>
+            </div>
+            <div class="row">
+                <h4 class="bloc__titre col-6">Particules fines: {{ donnees.indicepm10 }}</h4>
+                <h4 class="bloc__titre col-6">Dioxyde de soufre: {{ donnees.indiceso2 }}</h4>
             </div>
         </div>
 
-        {#{% if info.qualiteAir == 'Bonne' %}#}
-        <p class="mt-3 mb-3">La qualité de l'air étant bonne, vous pouvez vous rendre sur votre lieu de travail en voiture, mais privilégiez au maximum le co-voiturage et les transports en commun.</p>
-        {#{% endif %}#}
-
-        <div id="bloc__meteo" class="container">
-
-            <div class="row">
-                <div class="col">
-                    <h3 class="mb-4">Les prévisions météo dans votre ville</h3>
-                    <h4 class="mb-2">LA VILLE</h4>
-                    <div class="row">
-                        <h4 class="bloc__titre col-6">ICONE Beau temps</h4>
-                        <h4 class="bloc__titre col-6">Température: 27°C</h4>
-                    </div>
-                    <div class="row">
-                        <h4 class="bloc__titre col-6">Humidité: 34%</h4>
-                        <h4 class="bloc__titre col-6">Température ressentie: 29°C</h4>
-                    </div>
+        {% if users.lieu_travail is defined %}
+            <div class="col">
+                <h3 class="mb-4">Les indices de pollution sur votre lieu de travail</h3>
+                <h4 class="mb-2">{{ opentravail.location.name }}</h4>
+                <div class="row">
+                    <h4 class="bloc__titre col-6">Dioxyde d'azote: {{ donneesTravail.indiceno2 }}</h4>
+                    <h4 class="bloc__titre col-6">Ozone: {{ donneesTravail.indiceno3 }}</h4>
                 </div>
+                <div class="row">
+                    <h4 class="bloc__titre col-6">Particules fines: {{ donneesTravail.indicepm10 }}</h4>
+                    <h4 class="bloc__titre col-6">Dioxyde de soufre: {{ donneesTravail.indiceso2 }}</h4>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</div>
 
-                {% if users.lieu_travail is defined %}
-                    <div class="col">
-                        <h3 class="mb-4">Les prévisions météo à votre lieu de travail</h3>
-                        <h4 class="mb-2">LE LIEU DE TRAVAIL</h4>
-                        <div class="row">
-                            <h4 class="bloc__titre col-6">ICONE Beau temps</h4>
-                            <h4 class="bloc__titre col-6">Température: 27°C</h4>
-                        </div>
-                        <div class="row">
-                            <h4 class="bloc__titre col-6">Humidité: 34%</h4>
-                            <h4 class="bloc__titre col-6">Température ressentie: 29°C</h4>
-                        </div>
-                    </div>
-                {% endif %}
+{% if donnees.qualiteair == 'Bonne' %}
+    <p class="mt-3 mb-3">La qualité de l'air étant bonne, vous pouvez vous rendre sur votre lieu de travail en voiture, mais privilégiez au maximum le co-voiturage et les transports en commun.</p>
+{% endif %}{% if donnees.qualiteair == 'Moyenne' %}
+    <p class="mt-3 mb-3">La qualité de l'air étant moyenne, nous vous suggérons d'utiliser si possible les transports en commun ou le covoiturage afin de réduire les effets sur l'environnement.</p>
+{% endif %}{% if donnees.qualiteair == 'Médiocre' %}
+    <p class="mt-3 mb-3">La qualité de l'air étant mauvaise, nous vous invitons à ne pas utiliser d'engin à moteur. Cela aggraverait la situation. Autant que possible, veuillez vous déplacer à pied ou à vélo !</p>
+{% endif %}
+
+<div id="bloc__meteo" class="container">
+    <div class="row">
+        <div class="col">
+            <h3 class="mb-4">Les prévisions météo dans votre ville</h3>
+            <h4 class="mb-2">{{ open.location.name }}</h4>
+            <div class="row">
+                <img src="{{ open.current.condition.icon }}">
+                <h4 class="bloc__titre col-6">{{ open.current.condition.text }}</h4>
+                <h4 class="bloc__titre col-6">Température: {{ open.current.temp_c }}°C</h4>
+            </div>
+            <div class="row">
+                <h4 class="bloc__titre col-6">Humidité: {{ open.current.humidity }}%</h4>
+                <h4 class="bloc__titre col-6">Température ressentie: {{ open.current.feelslike_c }}°C</h4>
+            </div>
+        </div>
+
+        <div class="col">
+            <h3 class="mb-4">Les prévisions météo à votre lieu de travail</h3>
+            <h4 class="mb-2">{{ opentravail.location.name }}</h4>
+            <div class="row">
+                <img src="{{ opentravail.current.condition.icon }}">
+                <h4 class="bloc__titre col-6">{{ opentravail.current.condition.text }}</h4>
+                <h4 class="bloc__titre col-6">Température: {{ opentravail.current.temp_c }}°C</h4>
+            </div>
+            <div class="row">
+                <h4 class="bloc__titre col-6">Humidité: {{ opentravail.current.humidity }}%</h4>
+                <h4 class="bloc__titre col-6">Température ressentie: {{ opentravail.current.feelslike_c }}°C</h4>
             </div>
         </div>
     </div>
+</div>
+</body>
+</html>
 
 
-    </body>
 
-{% endblock %}
+
+
+
+

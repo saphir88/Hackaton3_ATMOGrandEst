@@ -19,7 +19,7 @@ use App\Entity\Users;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-
+use App\Service\Mailer;
 
 
 
@@ -40,45 +40,56 @@ class MainController extends Controller
     /**
      * @Route("/accueil", name="accueil", methods={"GET", "POST"})
      */
-    public function AccueilAction(Request $request){
+    public function AccueilAction(Request $request,Mailer $mailer){
 
         $user = new Users();
 
         $form = $this->createFormBuilder($user)
-            ->add('email', TextType::class)
-            ->add('ville', TextType::class)
-            ->add('lieutravail', TextType::class)
-            ->add('genre',  ChoiceType::class, array(
-                'choices' => array(
-                        'Homme' => 'Homme',
-                        'Femme' => 'Femme',
-                    )))
-            ->add('trancheAge',  ChoiceType::class, array(
-                'choices' => array(
+            ->add('email', TextType::class, ['label' => 'Adresse e-mail : '])
+            ->add('ville', TextType::class, ['label' => 'Lieu de résidence : '])
+            ->add('lieutravail', TextType::class, ['label' => 'Lieu de travail : '])
+            ->add('genre',  ChoiceType::class, [
+                'choices' => [
+                    'Homme' => 'Homme',
+                    'Femme' => 'Femme'
+                ],
+                    'label' => 'Genre : '
+                ]
+            )
+            ->add('trancheAge',  ChoiceType::class, [
+                'choices' => [
                     '18/25' => '18/25',
                     '25/35' => '25/35',
                     '35/55' => '35/55',
                     '55/70' => '55/70',
-                    '70+' => '70+',
-                )))
-            ->add('activite', ChoiceType::class, array(
-                'choices' => array(
+                    '70+' => '70+'
+                ],
+                'label' => "Tranche d'âge : "
+                ]
+            )
+            ->add('activite', ChoiceType::class, [
+                'choices' => [
                     'Foot' => 'Foot',
                     'Course' => 'Course',
                     'Velo' => 'Velo',
                     'Equitation' => 'Equitation',
                     'Randonnée' => 'Randonnée',
-                    'Autre'=> 'Autre',
-                )))
-            ->add('moyenTransport', ChoiceType::class, array(
-                'choices' => array(
+                    'Autre'=> 'Autre'
+                ],
+                    'label' => 'Activité sportive principale : '
+            ]
+            )
+            ->add('moyenTransport', ChoiceType::class, [
+                'choices' => [
                     'Voiture' => 'Voiture',
                     'Covoiturage'=>'Covoiturage',
                     'Velo' => 'Velo',
                     'A pied' => 'A pied',
                     'Transport en commun' => 'Transport en commun',
-                )))
-            ->add('save', SubmitType::class, array('label' => 'S\'incrire'))
+                ],
+                    'label' => 'Moyen de transport principal : '
+            ]
+            )
             ->getForm();
 
         $form->handleRequest($request);
@@ -86,12 +97,21 @@ class MainController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $form->getData();
             $user = $form->getData();
+
+            $donnees = $this->getDoctrine()->getManager()
+                ->getRepository(Info::class)->findOneBy(['commune'=>$_POST['form']['ville']]);
+
+            $donneesTravail = $this->getDoctrine()->getManager()
+                ->getRepository(Info::class)->findOneBy(['commune'=>$_POST['form']['lieutravail']]);
+            $mailer->sendEmail($_POST['form']['ville'],$_POST['form']['lieutravail'],$_POST['form']['email'],$donnees,$donneesTravail);
+
              $entityManager = $this->getDoctrine()->getManager();
              $entityManager->persist($user);
              $entityManager->flush();
 
              $this->redirectToRoute('accueil');
         }
+
         /* METEO */
 
         $commune = $this->getDoctrine()->getManager()
