@@ -5,8 +5,6 @@
         <div class="container">
             <div class="row">
                 <div class="border col-5 ">
-                    <p>Api Weather</p>
-
 
                     <form action="{{ path('accueil') }}" method="post">
                         <input type="text" name="ville" list="ville" autocomplete="off" onkeyup="showHint(this.value)" placeholder="Cherchez une ville ...">
@@ -119,13 +117,6 @@
         </div>
     </section>
 
-
-
-
-
-
-
-
     <section class="section4">
         <div class="container">
             <div class="row">
@@ -140,9 +131,7 @@
                                     {{ form_label(form.email) }}
                                     {{ form_widget(form.email) }}
                                 </div>
-
                                 <br>
-
                                 <div class="row">
                                     <div class="col-6">
                                         {{ form_row(form.ville, { 'attr': {'autocomplete': 'off','list':'ville', 'onkeyup':'showHint(this.value)'} }) }}
