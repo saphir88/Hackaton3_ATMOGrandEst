@@ -3,9 +3,17 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        {% block stylesheets %}
+            <link href="{{ asset('build/css/app.css') }}" rel="stylesheet" />
+        {% endblock %}
     </head>
     <body>
+        <header class="container">
+            <div class="row">
+                <div class="border logo col-4"><img src="{{ asset('images/logo.png') }}" alt="" href="#"></div>
+                <div class="border titre align-middle col-8"><h1>Respirez, Inspirez, Sensibilisez !</h1></div>
+            </div>
+        </header>
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
     </body>

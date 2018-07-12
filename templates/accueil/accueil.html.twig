@@ -1,0 +1,216 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Accueil</h1>
+    <section class="section1">
+        <div class="container">
+            <div class="row">
+                <div class="border col-5 ">
+                    <p>Api Weather</p>
+                    <div class="container">
+                        <div class="border cadreAPI row">
+                            <div class="col-10">
+                                <form method="POST" type="">
+                                    <input placeholder="Ville">
+                                    <button type="submit">Envoyer</button>
+                                </form>
+                                <p>Commune</p>
+                                <p>Protoxyde d'azote (N2O)</p>
+                                <p>Ozone (O3)</p>
+                                <p>Particules fines (PM10)</p>
+                                <p>Temperature</p>
+                                <p>Image du temps</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="border  col-6 offset-1">
+                    <p>Map</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section2">
+        <div class="container">
+            <div class="row">
+                <div class="border col-12">
+                    <p>Recommandations</p>
+                    <p>Personnes agées : Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                    <p>Asmathiques : Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                    <p> Enfants en bas âge : Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                    <p> Activités extérieures / jogging : Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                    <p>Activités extérieures / jogging :Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section3">
+        <div class="container">
+            <div class="row">
+                <div class="border col-12">
+                    <p>Stat</p>
+                    <canvas id="myChart" width="200" height="100"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section4">
+        <div class="container">
+            <div class="row">
+                <div class="border col-12">
+                    <p>News Letter</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                    <div class="container">
+                        <div class="row">
+                            <div class="border col-5 offset-3">
+                                <form method="POST">
+                                    <div>
+                                        <input placeholder="Mail">
+                                    </div>
+                                    <div>
+                                        <input placeholder="Ville de résidence">
+                                    </div>
+                                    <div>
+                                        <input placeholder="Lieu de travail">
+                                    </div>
+                                    <p>je suis:</p>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                        <label class="form-check-label" for="inlineRadio1"> un homme</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                        <label class="form-check-label" for="inlineRadio2">une femme</label>
+                                    </div>
+                                    <div>
+                                        <label class="form-check-label" for="inlineRadio2">Votre tranche d'age</label>
+                                        <select class="form-control col-6">
+                                            <option>...</option>
+                                            <option>18/25</option>
+                                            <option>25/35</option>
+                                            <option>35/55</option>
+                                            <option>55/70</option>
+                                            <option>70+</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="form-check-label" for="inlineRadio2">quelle principale acitivite physique extérieures pratiquez vous ?</label>
+                                        <select class="form-control col-6">
+                                            <option>...</option>
+                                            <option>Foot</option>
+                                            <option>Course</option>
+                                            <option>Vélo</option>
+                                            <option>autre</option>
+                                            <option>autre</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="form-check-label" for="inlineRadio2">quelle principale acitivite physique extérieures pratiquez vous ?</label>
+                                        <select class="form-control col-6">
+                                            <option>...</option>
+                                            <option>Voiture</option>
+                                            <option>Train</option>
+                                            <option>Vélo</option>
+                                            <option>autre</option>
+                                            <option>autre</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <style>
+        .border{
+            border: 1px solid black;
+        }
+        .section2{
+            margin-top: 20px;
+        }
+        .section3{
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        .section4{
+            margin-top: 20px;
+            margin-bottom: 100px;
+        }
+        .cadreAPI{
+            margin-bottom: 20px;
+        }
+    </style>
+{% endblock %}
+   {% block javascripts %}
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+
+       <script>
+
+           var ctx = document.getElementById("myChart");
+           var myChart = new Chart(ctx, {
+               type: 'bar',
+               data: {
+                   labels: ["Homme:18/25", "Femme:18/25","Homme:25/35","Femme: 25/35","Homme: 35/55","Femme: 35/55",
+                       "Homme: 55/70", "Femme:55/70", "Homme:70+","Femme:70+"],
+                   datasets: [{
+                       label: 'All',
+                       data: [{{ test }},50, 19, 50, 5, 2, 3,40,90,30],
+                       backgroundColor: [
+                           'rgba(54, 162, 235, 0.2)',
+                           'rgba(255, 99, 132, 0.2)',
+                           'rgba(54, 162, 235, 0.2)',
+                           'rgba(255, 99, 132, 0.2)',
+                           'rgba(54, 162, 235, 0.2)',
+                           'rgba(255, 99, 132, 0.2)',
+                           'rgba(54, 162, 235, 0.2)',
+                           'rgba(255, 99, 132, 0.2)',
+                           'rgba(54, 162, 235, 0.2)',
+                           'rgba(255, 99, 132, 0.2)',
+                       ],
+
+                       borderColor: [
+                           'rgba(54, 162, 235, 1)',
+                           'rgba(255,99,132,1)',
+                           'rgba(54, 162, 235, 1)',
+                           'rgba(255,99,132,1)',
+                           'rgba(54, 162, 235, 1)',
+                           'rgba(255,99,132,1)',
+                           'rgba(54, 162, 235, 1)',
+                           'rgba(255,99,132,1)',
+                           'rgba(54, 162, 235, 1)',
+                           'rgba(255,99,132,1)',
+                       ],
+                       borderWidth: 1
+                   }]
+               },
+               options: {
+                   scales: {
+                       yAxes: [{
+                           ticks: {
+                               beginAtZero:true
+                           }
+                       }]
+                   }
+               }
+           });
+
+
+       </script>
+   {% endblock %}
