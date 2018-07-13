@@ -102,8 +102,9 @@
                         <input type="hidden" id="longitude" name="longitude" value='7.75'>
                     {% endif %}
                 </div>
-                <div id="map" class="border col-6"></div>
             </div>
+
+            <div id="map" class="border col-6"></div>
         </div>
     </section>
     {% if donnees is not empty %}
@@ -136,7 +137,7 @@
             <div class="row">
                 <div class="border col-12">
                     <p>Newsletter</p>
-                    <p>Pour recevoir chaque jour un récapitulatif de la qualité de l'air, vous pouvez vous abonner à notre Newsletter</p>
+                    <p>Pour recevoir chaque jour un récapitulatif de la qualité de l'air, vous pouvez vous abonnez à notre Newsletter</p>
                     <div class="container">
                         <div class="row">
                             <div class="border col-6 offset-3">
@@ -293,7 +294,8 @@
            var myChart = new Chart(ctx, {
                type: 'bar',
                data: {
-                   labels: ["Hommes: 18/25", "Femmes: 18/25","Hommes: 25/35","Femmes: 25/35","Hommes: 35/55","Femmes: 35/55", "Hommes: 55/70", "Femmes: 55/70", "Hommes: 70+", "Femmes: 70+"],
+                   labels: ["Homme:18/25", "Femme:18/25","Homme:25/35","Femme: 25/35","Homme: 35/55","Femme: 35/55",
+                       "Homme: 55/70", "Femme:55/70", "Homme:70+","Femme:70+"],
                    datasets: [{
                        label: 'Nombre',
                        data: [ {{ nbhommes1825 }},{{ nbfemmes1825 }}, {{ nbhommes2535 }}, {{ nbfemmes2535 }},  {{ nbhommes3555 }},  {{ nbfemmes3555 }},  {{ nbhommes5570 }},{{ nbfemmes5570 }}, {{ nbhommes70 }},{{ nbfemmes70 }}],
@@ -348,7 +350,7 @@
                    datasets: [
                        {
                            label: "Sport",
-                           backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850","#c40850"],
+                           backgroundColor: ["#00adc6", "#87bd1a","#f0a409","#b9edf2","#373737","#5c8989"],
                            data: [{{ nbFoot }},{{ nbCourse }},{{ nbEquitation }},{{ nbvelo }},{{ nbRandonnee }},{{ nbAutre }}]
                        }
                    ]
@@ -368,7 +370,7 @@
                    labels: ["Voiture","Covoiturage", "Vélo", "À pied", "Transport en commun"],
                    datasets: [{
                        label: "Transport",
-                       backgroundColor: ["#3e95cd","#000ea2", "#8e5ea2","#3cba9f","#e8c3b9"],
+                       backgroundColor: ["#00adc6","#87bd1a", "#f0a409","#373737","#5c8989"],
                        data: [{{ nbvoiture }},{{ nbCovoiturage }},{{ nbVelo }},{{ nbapied }},{{ nbapied }}]
                    }]
                },
