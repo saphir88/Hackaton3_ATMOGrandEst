@@ -55,8 +55,8 @@ class Mailer {
             'donnees' => $donnees
         ]);
 
-        $message = (new\Swift_Message('infocontact'))
-            ->setFrom('axelfertinel@gmail.com')
+        $message = (new\Swift_Message('Votre bulletin quotidien de qualité de l\'air'))
+            ->setFrom('ATMO@grandest')
             ->setTo($email)
             ->setBody($body, 'text/html');
 

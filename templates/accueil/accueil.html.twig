@@ -58,31 +58,19 @@
             <div class="container">
                 <div class="row">
                     <div class="border col-12">
+                        <h3 style="text-transform: uppercase; font-size: 1.4em; font-weight: bold; background-color: #00adc6; color: white; padding: 30px;" class="mb-4">Recommandations</h3>
                         {% if donnees.qualiteAir == "Bonne" %}
-                            <p>Recommandations</p>
-                            <p>Personnes agées : Bonne</p>
-                            <p>Enfants en bas âge : Bonne</p>
-                            <p>Asmathiques : Bonne</p>
-                            <p>Activités extérieures / jogging : Bonne</p>
+                            <p>Personnes sensibles ou en bas-âge: Rien à signaler, l'air est respirable à pleins poumons !</p>
+                            <p>Activités extérieures: Toutes les conditions atmosphériques sont réunies ! C'est le bon moment pour sortir vous dépenser !</p>
                         {% elseif donnees.qualiteAir == "Moyenne" %}
-                            <p>Recommandations</p>
-                            <p>Personnes agées : Moyenne</p>
-                            <p>Enfants en bas âge : Moyenne</p>
-                            <p>Asmathiques : Moyenne</p>
-                            <p>Activités extérieures / jogging : Moyenne</p>
+                            <p>Personnes sensibles ou en bas-âge: Vous pouvez prendre l'air ! Néanmoins, nous vous conseillons de chercher un lieu aux alentours ayant une meilleure qualité d'air !</p>
+                            <p>Activités extérieures: Vous pouvez pratiquer une activité physique, mais la qualité de l'air n'étant pas optimale, nous vous suggérons d'attendre qu'un meilleur se profile !</p>
                         {% elseif donnees.qualiteAir == "Médiocre" %}
-                            <p>Recommandations</p>
-                            <p>Personnes agées : Médiocre</p>
-                            <p>Enfants en bas âge : Médiocre</p>
-                            <p>Asmathiques : Médiocre</p>
-                            <p>Activités extérieures / jogging : Médiocre</p>
+                            <p>Personnes sensibles ou en bas-âge: Évitez si possible de sortir de chez vous, vous risqueriez de mourir !</p>
+                            <p>Activités extérieures: Limiter les activités physiques et sportives intenses (dont les compétitions), autant en plein air qu’à l’intérieur.</p>
                         {% else %}
-                            <p>Recommandations</p>
-                            <p>Personnes agées : Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                            <p>Asmathiques : Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                            <p>Enfants en bas âge : Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                            <p>Activités extérieures / jogging : Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                            <p>Activités extérieures / jogging :Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <p>Personnes sensibles ou en bas-âge:
+                            <p>Activités extérieures: Limiter les activités physiques et sportives intenses (dont les compétitions), autant en plein air qu’à l’intérieur.</p>
                         {% endif %}
                     </div>
                 </div>
@@ -91,7 +79,7 @@
     {% endif %}
 
     <<section class="section3">
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
             <div class="border col-8 offset-2">
                 <p>Tranches d'âge</p>
@@ -120,7 +108,7 @@
             <div class="row">
                 <div class="border col-12">
                     <p>Newsletter</p>
-                    <p>Pour recevoir chaque jour un récapitulatif de la qualité de l'air, vous pouvez vous abonnez à notre Newsletter</p>
+                    <p>Pour recevoir chaque jour un récapitulatif de la qualité de l'air, vous pouvez vous abonner à notre Newsletter</p>
                     <div class="container">
                         <div class="row">
                             <div class="border col-6 offset-3">
@@ -247,8 +235,7 @@
            var myChart = new Chart(ctx, {
                type: 'bar',
                data: {
-                   labels: ["Homme:18/25", "Femme:18/25","Homme:25/35","Femme: 25/35","Homme: 35/55","Femme: 35/55",
-                       "Homme: 55/70", "Femme:55/70", "Homme:70+","Femme:70+"],
+                   labels: ["Hommes: 18/25", "Femmes: 18/25","Hommes: 25/35","Femmes: 25/35","Hommes: 35/55","Femmes: 35/55", "Hommes: 55/70", "Femmes: 55/70", "Hommes: 70+", "Femmes: 70+"],
                    datasets: [{
                        label: 'Nombre',
                        data: [ {{ nbhommes1825 }},{{ nbfemmes1825 }}, {{ nbhommes2535 }}, {{ nbfemmes2535 }},  {{ nbhommes3555 }},  {{ nbfemmes3555 }},  {{ nbhommes5570 }},{{ nbfemmes5570 }}, {{ nbhommes70 }},{{ nbfemmes70 }}],
@@ -289,7 +276,7 @@
                        }]
                    },
                    title: {
-                       display: true,
+                       display: false,
                        text: 'Personne'
                    }
                }
@@ -299,7 +286,7 @@
            new Chart(document.getElementById("doughnut-chart"), {
                type: 'doughnut',
                data: {
-                   labels: ["Foot", "Course", "Equitation", "Velo", "Randonnée","Autre"],
+                   labels: ["Foot", "Course", "Équitation", "Vélo", "Randonnée","Autre"],
                    datasets: [
                        {
                            label: "Sport",
@@ -310,7 +297,7 @@
                },
                options: {
                    title: {
-                       display: true,
+                       display: false,
                        text: 'Sport'
                    }
                }
@@ -320,7 +307,7 @@
            new Chart(document.getElementById("pie-chart"), {
                type: 'pie',
                data: {
-                   labels: ["Voiture","Covoiturage", "Vélo", "À pied", "Transport en commun"],
+                   labels: ["Voiture","Covoiturage", "Vélo", "À pied", "Transports en commun"],
                    datasets: [{
                        label: "Transport",
                        backgroundColor: ["#3e95cd","#000ea2", "#8e5ea2","#3cba9f","#e8c3b9"],
@@ -329,8 +316,8 @@
                },
                options: {
                    title: {
-                       display: true,
-                       text: 'Tansport'
+                       display: false,
+                       text: 'Transport'
                    }
                }
            });
