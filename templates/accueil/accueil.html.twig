@@ -44,9 +44,9 @@
                                 {% endfor %}
                             </div>
                         </div>
-                        {% else %}
-                            <input type="hidden" id="latitude" name="latitude" value='48.58'>
-                            <input type="hidden" id="longitude" name="longitude" value='7.75'>
+                    {% else %}
+                        <input type="hidden" id="latitude" name="latitude" value='48.58'>
+                        <input type="hidden" id="longitude" name="longitude" value='7.75'>
                     {% endif %}
                 </div>
                 <div id="map" class="border col-6"></div>
@@ -100,7 +100,7 @@
                     <p>Pour recevoir chaque jour un récapitulatif de la qualité de l'air, vous pouvez vous abonnez à notre Newsletter</p>
                     <div class="container">
                         <div class="row">
-                            <div class="border col-6 offset-3">
+                            <div class=" col-6 offset-3">
                                 {{ form_start(form) }}
                                 <div class="text-center w-100">
                                     {{ form_label(form.email) }}
@@ -153,28 +153,38 @@
             </div>
         </div>
     </section>
-    <section class="section3">
-        <div class="container">
-            <div class="row">
-                <div class="border col-8 offset-2">
-                    <canvas id="myChart" width="200" height="100"></canvas>
+    <div class="container">
+        <section class="section3">
+            <div class="container ">
+                <div class="row">
+                    <div class="stat2 col-8 offset-2">
+                        <canvas id="myChart" width="200" height="100"></canvas>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
-    <section class="section3">
-        <div class="container">
-            <div class="row">
-                <div class="border col-6">
-                    <canvas id="doughnut-chart"></canvas>
-                </div>
-                <div class="border col-6 ">
-                    <canvas id="pie-chart"></canvas>
-                </div>
-            </div>
-        </div>
-    </section>
+        </section>
+        <hr>
+        <section class="section3">
+            <div class="container ">
+                <div class="row">
+                    <div class="stat2 col-8 offset-2">
+                        <canvas id="doughnut-chart"></canvas>
+                    </div>
 
+                </div>
+            </div>
+        </section>
+        <hr>
+        <section class="section3">
+            <div class="container ">
+                <div class="row">
+                    <div class="stat2 col-8 offset-2 ">
+                        <canvas id="pie-chart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
 
     <style>
         .border{
@@ -191,9 +201,7 @@
             margin-top: 20px;
             margin-bottom: 100px;
         }
-        .cadreAPI{
-            margin-bottom: 20px;
-        }
+
     </style>
 
     <script>
