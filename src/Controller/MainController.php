@@ -45,9 +45,9 @@ class MainController extends Controller
         $user = new Users();
 
         $form = $this->createFormBuilder($user)
-            ->add('email', TextType::class, ['label' => 'Adresse e-mail : '])
-            ->add('ville', TextType::class, ['label' => 'Lieu de résidence : '])
-            ->add('lieutravail', TextType::class, ['label' => 'Lieu de travail : '])
+            ->add('email', TextType::class, array('attr' => array('placeholder' => 'Adresse email'), 'label' => false ))
+            ->add('ville', TextType::class, array('attr' => array('placeholder' => 'Lieu de résidence'), 'label' => false ))
+            ->add('lieutravail', TextType::class, array('attr' => array('placeholder' => 'Lieu de travail'), 'label' => false ))
             ->add('genre',  ChoiceType::class, [
                 'choices' => [
                     'Homme' => 'Homme',
@@ -64,7 +64,7 @@ class MainController extends Controller
                     '55/70' => '55/70',
                     '70+' => '70+'
                 ],
-                'label' => "Tranche d'âge : "
+                'label' => "Âges: "
                 ]
             )
             ->add('activite', ChoiceType::class, [
@@ -76,7 +76,7 @@ class MainController extends Controller
                     'Randonnée' => 'Randonnée',
                     'Autre'=> 'Autre'
                 ],
-                    'label' => 'Activité sportive principale : '
+                    'label' => 'Activité: '
             ]
             )
             ->add('moyenTransport', ChoiceType::class, [
@@ -87,7 +87,7 @@ class MainController extends Controller
                     'A pied' => 'A pied',
                     'Transport en commun' => 'Transport en commun',
                 ],
-                    'label' => 'Moyen de transport principal : '
+                    'label' => 'Moyen de transport'
             ]
             )
             ->getForm();

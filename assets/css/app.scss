@@ -3,12 +3,16 @@
 $bleu: #00adc6;
 $gris: #4d4d4d;
 
+* {
+  font-family: 'Noto Sans', sans-serif;
+}
+
 .border{
   border: 1px solid black;
 }
 
 .header {
-  background: linear-gradient(transparent, white,),url("https://fr.cdn.v5.futura-sciences.com/buildsv6/images/wide1920/4/7/3/47343047c5_105832_ciel-bleu-01.jpg") no-repeat;
+  background: linear-gradient(transparent, white),url("https://fr.cdn.v5.futura-sciences.com/buildsv6/images/wide1920/4/7/3/47343047c5_105832_ciel-bleu-01.jpg") no-repeat;
   background-size: 100%;
   display: flex;
   flex-direction: row;
@@ -89,4 +93,21 @@ $gris: #4d4d4d;
   content: "";
   clear: both;
   display: table;
+}
+
+.box-news{
+  text-align: center;
+}
+
+#slogan {
+  font-family: 'Pacifico', cursive;
+  font-size: 50px;
+  color: whitesmoke;
+  text-shadow: 1px 1px grey;
+}
+
+strong {
+  font-weight: bolder;
+  font-size: 1.3em;
+  text-shadow: 1px 1px black;
 }
