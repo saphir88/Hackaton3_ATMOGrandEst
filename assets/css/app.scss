@@ -8,17 +8,20 @@ $gris: #4d4d4d;
 }
 
 .header {
+  background: linear-gradient(transparent, white,),url("https://fr.cdn.v5.futura-sciences.com/buildsv6/images/wide1920/4/7/3/47343047c5_105832_ciel-bleu-01.jpg") no-repeat;
+  background-size: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  padding-top: 3vh;
-  padding-bottom: 3vh;
+  margin-bottom: 2vw;
 }
 
 .header img{
-  width: 120px;
-  height: auto;
+  height: 120px;
+  width: auto;
+  margin: 2vw;
+
 }
 
 #map {
