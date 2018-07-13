@@ -24,3 +24,66 @@ $gris: #4d4d4d;
 #map {
   min-height: 420px;
 }
+
+/* css meteo */
+
+.box-weather{
+  text-align: center;
+  color: white;
+  background-color: #719b9c;
+}
+
+.one{
+  padding: 20px;
+}
+
+.select-blue{
+  background-color: #00adc6;
+  padding: 10px;
+}
+
+.qualite{
+  padding: 5px;
+}
+
+.heightA{
+  height: 200px;
+}
+
+.heightB{
+  height: 100px;
+}
+
+/* Style the search field */
+.box-weather form.example input[type=text] {
+  padding: 10px;
+  font-size: 17px;
+  border: 1px solid grey;
+  float: left;
+  width: 80%;
+  background: #f1f1f1;
+}
+
+/* Style the submit button */
+.box-weather form.example button {
+  float: left;
+  width: 20%;
+  padding: 10px;
+  background: #00adc6;
+  color: white;
+  font-size: 17px;
+  border: 1px solid grey;
+  border-left: none; /* Prevent double borders */
+  cursor: pointer;
+}
+
+.box-weather form.example button:hover {
+  background: #00a4bc;
+}
+
+/* Clear floats */
+.box-weather form.example::after {
+  content: "";
+  clear: both;
+  display: table;
+}

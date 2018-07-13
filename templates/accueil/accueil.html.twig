@@ -1,58 +1,113 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <section class="section1">
-        <div class="container">
-            <div class="row">
-                <div class="border col-5 ">
+    <section class="section1 container">
+        <div class="row">
+            <div class="box-weather container border col-6">
+                <div class="row">
 
-                    <form action="{{ path('accueil') }}" method="post">
-                        <input type="text" name="ville" list="ville" autocomplete="off" onkeyup="showHint(this.value)" placeholder="Cherchez une ville ...">
-                        <input type="submit">
-                    </form>
-
-                    <datalist id="ville"></datalist>
+                    <!--                row 1                  -->
+                    <div class="one container col-12 border">
+                        <div class="row">
+                            <div class="col-12">
+                                <!-- SAVE <form class="example" method="post" action="">
+                                  <input type="text" placeholder="Recherchez une ville ..." name="search">
+                                  <button type="submit"><i class="fa fa-search"></i></button>
+                                </form> -->
+                                <form class="example" action="{{ path('accueil') }}" method="post">
+                                    <input type="text" name="ville" list="ville" autocomplete="off" onkeyup="showHint(this.value)" placeholder="Recherchez une ville ...">
+                                    <button type="submit"><i class="fa fa-search"></i></button>
+                                </form>
+                                <datalist id="ville"></datalist>
+                            </div>
+                        </div>
+                    </div>
 
                     {% if open is not empty %}
                         <input type="hidden" id="latitude" name="latitude" value='{{ open.location.lat }}'>
                         <input type="hidden" id="longitude" name="longitude" value='{{ open.location.lon }}'>
-                        <div class="row mt-2">
-                            <h3 class="text-center">Actuellement à {{ open.location.name }}</h3>
-                            {% if donnees is not empty %}
-                                <p>Dioxyde d'azote (NO2): {{ donnees.indiceno2 }}</p>
-                                <p>Ozone (O3): {{ donnees.indiceo3 }}</p>
-                                <p>Particules fines (PM10): {{ donnees.indicepm10 }}</p>
-                                <p>Qualité de l'air: {{ donnees.qualiteair }}</p>
-                            {% else %}
+                        <!--                row  2                 -->
+                        <div class="select-blue container col-12 border"><h3>Actuellement à {{ open.location.name }}</h3></div>
 
-                                <p style="height: 200px;"></p>
-                            {% endif %}
-                            <div class="col-6">
-                                <h4>Météo actuelle:</h4>
-                                <img src="{{ open.current.condition.icon }}" style="float: left">
-                                <p>{{ open.current.condition.text }}</p>
-                                <p>{{ open.current.temp_c }}°C</p>
+                        {% if donnees is not empty %}
+                            <!--                row  3                 -->
+                            <div class="container col-12">
+                                <div class="row">
+                                    <div class="col-6 border"><h3>Dioxyde d'azote (NO2): {{ donnees.indiceno2 }}</h3></div>
+                                    <div class="col-6 border"><h3>Ozone (O3): {{ donnees.indiceo3 }}</h3></div>
+                                </div>
                             </div>
-                            <div class="col-6">
-                                <h4>Prévision: </h4>
-                                {% for forecast in open.forecast.forecastday %}
-                                    <img src="{{ forecast.day.condition.icon }}" style="float: left">
-                                    <p>min: {{ forecast.day.mintemp_c }}°C</p>
-                                    <p>max: {{ forecast.day.maxtemp_c }}°C</p>
-                                    <p>{{ forecast.day.condition.text }}</p>
 
-                                {% endfor %}
+                            <!--                row  4                 -->
+                            <div class="container col-12">
+                                <div class="row">
+                                    <div class="col-6 border"><h3>Particules fines (PM10): {{ donnees.indicepm10 }}</h3></div>
+                                    <div class="col-6 border"><h3>Dioxyde de soufre (SO2): {{ donnees.indiceso2 }}</h3></div>
+                                </div>
+                            </div>
+                        {% else %}
+
+                            <!--                row  3                 -->
+                            <div class="container col-12">
+                                <div class="row">
+                                    <div class="col-6 border"><h3>Dioxyde d'azote (NO2):</h3></div>
+                                    <div class="col-6 border"><h3>Ozone (O3):</h3></div>
+                                </div>
+                            </div>
+
+                            <!--                row  4                 -->
+                            <div class="container col-12">
+                                <div class="row">
+                                    <div class="col-6 border"><h3>Particules fines (PM10):</h3></div>
+                                    <div class="col-6 border"><h3>Dioxyde de soufre (SO2):</h3></div>
+                                </div>
+                            </div>
+
+                        {% endif %}
+
+                        <!--                row  5                 -->
+                        <div class="container col-12 border qualite"><h3>Qualité de l'air: {{ donnees.qualiteair }}</h3></div>
+
+                        <!--                row  6                 -->
+                        <div class="container col-12">
+                            <div class="row">
+                                <div class="col-6 border select-blue"><h3>Actuellement</h3></div>
+                                <div class="col-6 border select-blue"><h3>Prévisions</h3></div>
                             </div>
                         </div>
-                        {% else %}
-                            <input type="hidden" id="latitude" name="latitude" value='48.58'>
-                            <input type="hidden" id="longitude" name="longitude" value='7.75'>
+
+                        {% for forecast in open.forecast.forecastday %}
+                            <!--                row  7                -->
+                            <div class="container col-12">
+                                <div class="row">
+                                    <div class="container col-6 border heightA">
+                                        <div class="row">
+                                            <div class="col-12"><img src="{{ open.current.condition.icon }}"></div>
+                                            <div class="col-12"><h3>{{ open.current.condition.text }}, {{ open.current.temp_c }}°C</h3></div>
+                                        </div>
+                                    </div>
+                                    <div class="container col-6">
+                                        <div class="row">
+                                            <div class="col-6 border heightB"><img src="{{ forecast.day.condition.icon }}"></div>
+                                            <div class="col-6 border heightB"><h3>min: {{ forecast.day.mintemp_c }}°C</h3></div>
+                                            <div class="col-6 border heightB"><h3>{{ forecast.day.condition.text }}</h3></div>
+                                            <div class="col-6 border heightB"><h3>max: {{ forecast.day.maxtemp_c }}°C</h3></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <input type="hidden" id="latitude" name="latitude" value='48.58'>
+                        <input type="hidden" id="longitude" name="longitude" value='7.75'>
                     {% endif %}
                 </div>
-                <div id="map" class="border col-6"></div>
             </div>
+
+            <div id="map" class="border col-6"></div>
         </div>
     </section>
+
     {% if donnees is not empty %}
         <section class="section2">
             <div class="container">
