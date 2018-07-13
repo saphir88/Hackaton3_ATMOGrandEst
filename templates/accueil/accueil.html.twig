@@ -90,30 +90,7 @@
         </section>
     {% endif %}
 
-    <<section class="section3">
-    <div class="container">
-        <div class="row">
-            <div class="border col-8 offset-2">
-                <p>Tranches d'âge</p>
-                <canvas id="myChart" width="200" height="100"></canvas>
-            </div>
-        </div>
-    </div>
-</section>
-    <section class="section3">
-        <div class="container">
-            <div class="row">
-                <div class="border col-6">
-                    <p>Sports en plein air</p>
-                    <canvas id="doughnut-chart"></canvas>
-                </div>
-                <div class="border col-6 ">
-                    <p>Moyens de transport</p>
-                    <canvas id="pie-chart"></canvas>
-                </div>
-            </div>
-        </div>
-    </section>
+
 
     <section class="section4">
         <div class="container">
@@ -176,7 +153,27 @@
             </div>
         </div>
     </section>
-
+    <section class="section3">
+        <div class="container">
+            <div class="row">
+                <div class="border col-8 offset-2">
+                    <canvas id="myChart" width="200" height="100"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section3">
+        <div class="container">
+            <div class="row">
+                <div class="border col-6">
+                    <canvas id="doughnut-chart"></canvas>
+                </div>
+                <div class="border col-6 ">
+                    <canvas id="pie-chart"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
 
 
     <style>
@@ -290,7 +287,7 @@
                    },
                    title: {
                        display: true,
-                       text: 'Personne'
+                       text: 'Tranches d\'âge'
                    }
                }
            });
@@ -311,7 +308,7 @@
                options: {
                    title: {
                        display: true,
-                       text: 'Sport'
+                       text: 'Sports en plein air'
                    }
                }
            });
@@ -330,7 +327,7 @@
                options: {
                    title: {
                        display: true,
-                       text: 'Tansport'
+                       text: 'Moyens de transport'
                    }
                }
            });
