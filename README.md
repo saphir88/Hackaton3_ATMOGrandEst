@@ -1,7 +1,7 @@
 ## Le projet :
-Création d'un site/outil libre exploitant des données fournises par [Atmo Grand Est](http://www.atmo-grandest.eu/).
+Création d'un site/outil libre exploitant des données fournies par [Atmo Grand Est](http://www.atmo-grandest.eu/).
 Nous avons donc créé un site permettant aux visiteurs de se renseigner sur la qualité de l'air et sur la météo de leur ville tout en ayant des recommandations en fonction de ces 2 facteurs.
-Ils peuvent ensuite s'inscrire à une newletter (mail) et renseigner quelques informations non obligatoire afin de remplir une base de statistique afin que les autres visiteurs du site puissent voir qui sont les personnes qui s'inscrivent à la newlestter (sexe, tranche d'âge, sport et moyen de transport privilégié).
+Ils peuvent ensuite s'inscrire à une newsletter (mail) et renseigner quelques informations non obligatoire afin de remplir une base de statistique afin que les autres visiteurs du site puissent voir qui sont les personnes qui s'inscrivent à la newsletter (sexe, tranche d'âge, sport et moyen de transport privilégié).
 
 ## Le type de projet :
 Troisième Hackaton de la Wild Code School fait en 46h !
