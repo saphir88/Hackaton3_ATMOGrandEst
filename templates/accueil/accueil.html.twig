@@ -1,0 +1,409 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <section class="section1 container">
+        <div class="row">
+            <div class="box-weather container border col-6">
+                <div class="row">
+
+                    <!--                row 1                  -->
+                    <div class="one container col-12 border">
+                        <div class="row">
+                            <div class="col-12">
+                                <p>En entrant une ville de la région <strong>Grand Est</strong>, vous accèderez aux informations concernant la qualité de son air.</p>
+                                <form class="example" action="{{ path('accueil') }}" method="post">
+                                    <input type="text" name="ville" list="ville" autocomplete="off" onkeyup="showHint(this.value)" placeholder="Recherchez une ville ...">
+                                    <button type="submit"><i class="fa fa-search"></i></button>
+                                </form>
+                                <datalist id="ville"></datalist>
+                            </div>
+                        </div>
+                    </div>
+
+                    {% if open is not empty %}
+                        <input type="hidden" id="latitude" name="latitude" value='{{ open.location.lat }}'>
+                        <input type="hidden" id="longitude" name="longitude" value='{{ open.location.lon }}'>
+                        <!--                row  2                 -->
+                        <div class="select-blue container col-12 border"><h3>Actuellement à <strong>{{ open.location.name }}</strong></h3></div>
+
+                        {% if donnees is not empty %}
+                            <!--                row  3                 -->
+                            <div class="container col-12">
+                                <div class="row">
+                                    <div class="col-6 border"><h3>Dioxyde d'azote (NO2): <strong>{{ donnees.indiceno2 }}</strong></h3></div>
+                                    <div class="col-6 border"><h3>Ozone (O3): <strong>{{ donnees.indiceo3 }}</strong></h3></div>
+                                </div>
+                            </div>
+
+                            <!--                row  4                 -->
+                            <div class="container col-12">
+                                <div class="row">
+                                    <div class="col-6 border"><h3>Particules fines (PM10): <strong>{{ donnees.indicepm10 }}</strong></h3></div>
+                                    <div class="col-6 border"><h3>Dioxyde de soufre (SO2): <strong>{{ donnees.indiceso2 }}</strong></h3></div>
+                                </div>
+                            </div>
+                        {% else %}
+
+                            <!--                row  3                 -->
+                            <div class="container col-12">
+                                <div class="row">
+                                    <div class="col-6 border"><h3>Dioxyde d'azote (NO2):</h3></div>
+                                    <div class="col-6 border"><h3>Ozone (O3):</h3></div>
+                                </div>
+                            </div>
+
+                            <!--                row  4                 -->
+                            <div class="container col-12">
+                                <div class="row">
+                                    <div class="col-6 border"><h3>Particules fines (PM10):</h3></div>
+                                    <div class="col-6 border"><h3>Dioxyde de soufre (SO2):</h3></div>
+                                </div>
+                            </div>
+
+                        {% endif %}
+
+                        <!--                row  5                 -->
+                        <div class="container col-12 border qualite"><h3>Qualité de l'air: {{ donnees.qualiteair }}</h3></div>
+
+                        <!--                row  6                 -->
+                        <div class="container col-12">
+                            <div class="row">
+                                <div class="col-6 border select-blue"><h3>Actuellement</h3></div>
+                                <div class="col-6 border select-blue"><h3>Prévisions</h3></div>
+                            </div>
+                        </div>
+
+                        {% for forecast in open.forecast.forecastday %}
+                            <!--                row  7                -->
+                            <div class="container col-12">
+                                <div class="row">
+                                    <div class="container col-6 border heightA">
+                                        <div class="row">
+                                            <div class="col-12"><img src="{{ open.current.condition.icon }}"></div>
+                                            <div class="col-12"><h3>{{ open.current.condition.text }}, {{ open.current.temp_c }}°C</h3></div>
+                                        </div>
+                                    </div>
+                                    <div class="container col-6">
+                                        <div class="row">
+                                            <div class="col-6 border heightB"><img src="{{ forecast.day.condition.icon }}"></div>
+                                            <div class="col-6 border heightB"><h3>min: {{ forecast.day.mintemp_c }}°C</h3></div>
+                                            <div class="col-6 border heightB"><h3 style="font-size: 20px;">{{ forecast.day.condition.text }}</h3></div>
+                                            <div class="col-6 border heightB"><h3>max: {{ forecast.day.maxtemp_c }}°C</h3></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <input type="hidden" id="latitude" name="latitude" value='48.58'>
+                        <input type="hidden" id="longitude" name="longitude" value='7.75'>
+                    {% endif %}
+                </div>
+            </div>
+            <div id="map" class="border col-6"></div>
+        </div>
+    </section>
+    {% if donnees is not empty %}
+        <section class="section2">
+            <div class="container">
+                <div class="row">
+                    <div class=" col-12">
+                        <h3 style="text-transform: uppercase; font-size: 1.4em; font-weight: bold; background-color: #00adc6; color: white; padding: 30px;" class="mb-4">Recommandations</h3>
+                        {% if donnees.qualiteAir == "Bonne" %}
+                            <p>Personnes sensibles ou en bas-âge: Rien à signaler, l'air est respirable à pleins poumons !</p>
+                            <p>Activités extérieures: Toutes les conditions atmosphériques sont réunies ! C'est le bon moment pour sortir vous dépenser !</p>
+                        {% elseif donnees.qualiteAir == "Moyenne" %}
+                            <p>Personnes sensibles ou en bas-âge: Vous pouvez prendre l'air ! Néanmoins, nous vous conseillons de chercher un lieu aux alentours ayant une meilleure qualité d'air !</p>
+                            <p>Activités extérieures: Vous pouvez pratiquer une activité physique, mais la qualité de l'air n'étant pas optimale, nous vous suggérons d'attendre qu'un meilleur se profile !</p>
+                        {% elseif donnees.qualiteAir == "Médiocre" %}
+                            <p>Personnes sensibles ou en bas-âge: Évitez si possible de sortir de chez vous, vous risqueriez de mourir !</p>
+                            <p>Activités extérieures: Limiter les activités physiques et sportives intenses (dont les compétitions), autant en plein air qu’à l’intérieur.</p>
+                        {% else %}
+                            <p>Personnes sensibles ou en bas-âge:
+                            <p>Activités extérieures: Limiter les activités physiques et sportives intenses (dont les compétitions), autant en plein air qu’à l’intérieur.</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </section>
+    {% endif %}
+
+    <section class="container section4">
+        <div class="row">
+            <div class="col-12">
+                <h3 style="text-transform: uppercase; font-size: 1.4em; font-weight: bold; background-color: #00adc6; color: white; padding: 30px;" class="mb-4">Newsletter</h3>
+            </div>
+            <div class="col-12">
+                <p class="text-center">Pour recevoir chaque jour un récapitulatif de la qualité de l'air, vous pouvez vous abonner à notre Newsletter</p>
+            </div>
+        </div>
+        <div class="container">
+            {{ form_start(form) }}
+            <div class="row offset-2" style="margin-bottom: 1vw; margin-top: 1vw">
+                <div class="col-12 offset-2">
+                    {{ form_row(form.email) }}
+                </div>
+            </div>
+            <div class="row offset-2" style="margin-bottom: 1vw">
+                <div class="col-12 offset-2">
+                    {{ form_row(form.ville, { 'attr': {'autocomplete': 'off','list':'ville', 'onkeyup':'showHint(this.value)'} }) }}
+                </div>
+            </div>
+            <div class="row offset-2" style="margin-bottom: 1vw">
+                <div class="col-12 offset-2">
+                    {{ form_row(form.lieutravail, { 'attr': {'autocomplete': 'off','list':'ville', 'onkeyup':'showHint(this.value)'} }) }}
+                </div>
+            </div>
+            <div class="row offset-2" style="margin-bottom: 1vw">
+                <div class="col-3" style="margin-left: 100px">
+                    <p>{{ form_label(form.genre) }}</p>
+                    <p style="margin-top: -20px">{{ form_widget(form.genre) }}</p>
+                </div>
+                <div class="col-3">
+                    <p>{{ form_label(form.trancheAge) }}</p>
+                    <p style="margin-top: -20px">{{ form_widget(form.trancheAge) }}</p>
+                </div>
+            </div>
+            <div class="row offset-2" style="margin-bottom: 1vw">
+                <div class="col-3" style="margin-left: 100px">
+                    <p>{{ form_label(form.activite) }}</p>
+                    <p style="margin-top: -20px">{{ form_widget(form.activite) }}</p>
+                </div>
+                <div class="col-3 offset">
+                    <p>{{ form_label(form.moyenTransport) }}</p>
+                    <p style="margin-top: -20px">{{ form_widget(form.moyenTransport) }}</p>
+                </div>
+            </div>
+            <input type="submit" class="btn btn-primary" style="margin-left: 40%">
+            {{ form_end(form) }}
+
+
+        </div>
+
+
+
+
+        </div>
+        </div>
+    </section>
+    <div class="container">
+        <h3 style="text-transform: uppercase; font-size: 1.4em; font-weight: bold; background-color: #00adc6; color: white; padding: 30px;" class="mb-4">Statistiques</h3>
+        <section class="section3">
+            <div class="container ">
+                <div class="row">
+                    <div class="stat2 col-8 offset-2">
+                        <canvas id="myChart" width="200" height="100"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <hr>
+        <section class="section3">
+            <div class="container ">
+                <div class="row">
+                    <div class="stat2 col-8 offset-2">
+                        <canvas id="doughnut-chart"></canvas>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        <hr>
+        <section class="section3">
+            <div class="container ">
+                <div class="row">
+                    <div class="stat2 col-8 offset-2 ">
+                        <canvas id="pie-chart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <style>
+        .border{
+            border: 1px solid black;
+        }
+        .section2{
+            margin-top: 20px;
+        }
+        .section3{
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        .section4{
+            margin-top: 20px;
+            margin-bottom: 100px;
+        }
+        .cadreAPI{
+            margin-bottom: 20px;
+        }
+    </style>
+
+    <script>
+        // Initialize and add the map
+        function initMap() {
+            // The location of myLatLng
+            var latitude = document.getElementById('latitude').value;
+            var longitude = document.getElementById('longitude').value;
+
+            var myLatLng = {lat: parseFloat(latitude), lng: parseFloat(longitude)};
+            // The map, centered at myLatLng
+            var map = new google.maps.Map(
+                document.getElementById('map'), {zoom: 12, center: myLatLng});
+            // The marker, positioned at myLatLng
+            //var marker = new google.maps.Marker({position: myLatLng, map: map});
+            // The marker, zone cercle myLatLng
+            var zone = new google.maps.Circle({
+                center: myLatLng,
+                map: map,
+                //strokeColor: '#ffffff',
+                //strokeOpacity: 0.8,
+                //strokeWeight: 2,
+                //fillColor: '#fe5e2f',
+                //fillOpacity: 0.35,
+                //radius: 1000
+            });
+        }
+    </script>
+    <!--Load the API from the specified URL
+    * The async attribute allows the browser to render the page while the API loads
+    * The key parameter will contain your own API key (which is not needed for this tutorial)
+    * The callback parameter executes the initMap() function
+    -->
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDcSv2oPG3tP4f_DFHF_VgyvfhMDTtyFlA&callback=initMap">
+    </script>
+
+{% endblock %}
+   {% block javascripts %}
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+
+       <script>
+
+           var ctx = document.getElementById("myChart");
+           var myChart = new Chart(ctx, {
+               type: 'bar',
+               data: {
+                   labels: ["Homme:18/25", "Femme:18/25","Homme:25/35","Femme: 25/35","Homme: 35/55","Femme: 35/55",
+                       "Homme: 55/70", "Femme:55/70", "Homme:70+","Femme:70+"],
+                   datasets: [{
+                       label: 'Nombre',
+                       data: [ {{ nbhommes1825 }},{{ nbfemmes1825 }}, {{ nbhommes2535 }}, {{ nbfemmes2535 }},  {{ nbhommes3555 }},  {{ nbfemmes3555 }},  {{ nbhommes5570 }},{{ nbfemmes5570 }}, {{ nbhommes70 }},{{ nbfemmes70 }}],
+                       backgroundColor: [
+                           'rgba(54, 162, 235, 0.2)',
+                           'rgba(255, 99, 132, 0.2)',
+                           'rgba(54, 162, 235, 0.2)',
+                           'rgba(255, 99, 132, 0.2)',
+                           'rgba(54, 162, 235, 0.2)',
+                           'rgba(255, 99, 132, 0.2)',
+                           'rgba(54, 162, 235, 0.2)',
+                           'rgba(255, 99, 132, 0.2)',
+                           'rgba(54, 162, 235, 0.2)',
+                           'rgba(255, 99, 132, 0.2)',
+                       ],
+
+                       borderColor: [
+                           'rgba(54, 162, 235, 1)',
+                           'rgba(255,99,132,1)',
+                           'rgba(54, 162, 235, 1)',
+                           'rgba(255,99,132,1)',
+                           'rgba(54, 162, 235, 1)',
+                           'rgba(255,99,132,1)',
+                           'rgba(54, 162, 235, 1)',
+                           'rgba(255,99,132,1)',
+                           'rgba(54, 162, 235, 1)',
+                           'rgba(255,99,132,1)',
+                       ],
+                       borderWidth: 1
+                   }]
+               },
+               options: {
+                   scales: {
+                       yAxes: [{
+                           ticks: {
+                               beginAtZero:true
+                           }
+                       }]
+                   },
+                   title: {
+                       display: true,
+                       text: 'Tranches d\'âge'
+                   }
+               }
+           });
+       </script>
+       <script>
+           new Chart(document.getElementById("doughnut-chart"), {
+               type: 'doughnut',
+               data: {
+                   labels: ["Foot", "Course", "Equitation", "Velo", "Randonnée","Autre"],
+                   datasets: [
+                       {
+                           label: "Sport",
+                           backgroundColor: ["#00adc6", "#87bd1a","#f0a409","#b9edf2","#373737","#5c8989"],
+                           data: [{{ nbFoot }},{{ nbCourse }},{{ nbEquitation }},{{ nbvelo }},{{ nbRandonnee }},{{ nbAutre }}]
+                       }
+                   ]
+               },
+               options: {
+                   title: {
+                       display: true,
+                       text: 'Sports en plein air'
+                   }
+               }
+           });
+       </script>
+       <script>
+           new Chart(document.getElementById("pie-chart"), {
+               type: 'pie',
+               data: {
+                   labels: ["Voiture","Covoiturage", "Vélo", "À pied", "Transport en commun"],
+                   datasets: [{
+                       label: "Transport",
+                       backgroundColor: ["#00adc6","#87bd1a", "#f0a409","#373737","#5c8989"],
+                       data: [{{ nbvoiture }},{{ nbCovoiturage }},{{ nbVelo }},{{ nbapied }},{{ nbapied }}]
+                   }]
+               },
+               options: {
+                   title: {
+                       display: true,
+                       text: 'Moyens de transport'
+                   }
+               }
+           });
+       </script>
+       <script>
+           var commune = [];
+
+           {% for commune in tableau %}
+           commune.push('{{ commune }}');
+           {% endfor %}
+
+           function showHint(str) {
+
+               if (str.length == 0) {
+                   document.getElementById("txtHint").innerHTML = "";
+                   return;
+               } else {
+                   var xmlhttp = new XMLHttpRequest();
+
+                   xmlhttp.onreadystatechange = function() {
+                       if (this.readyState == 4 && this.status == 200) {
+                           for (var i=0; i <  commune.length;++i){
+                               str += '<option value="'+commune[i]+'" />';
+                           }
+                           var my_list = document.getElementById("ville");
+                           my_list.innerHTML = str;
+
+                       }
+                   };
+                   xmlhttp.open("GET", "/test/?q="+str, true);
+                   xmlhttp.send();
+               }
+           }
+       </script>
+   {% endblock %}

@@ -1,0 +1,113 @@
+@import '~bootstrap/scss/bootstrap';
+
+$bleu: #00adc6;
+$gris: #4d4d4d;
+
+* {
+  font-family: 'Noto Sans', sans-serif;
+}
+
+.border{
+  border: 1px solid black;
+}
+
+.header {
+  background: linear-gradient(transparent, white),url("https://fr.cdn.v5.futura-sciences.com/buildsv6/images/wide1920/4/7/3/47343047c5_105832_ciel-bleu-01.jpg") no-repeat;
+  background-size: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 2vw;
+}
+
+.header img{
+  height: 120px;
+  width: auto;
+  margin: 2vw;
+
+}
+
+#map {
+  min-height: 420px;
+}
+
+/* css meteo */
+
+.box-weather{
+  text-align: center;
+  color: white;
+  background-color: #719b9c;
+}
+
+.one{
+  padding: 20px;
+}
+
+.select-blue{
+  background-color: #00adc6;
+  padding: 10px;
+}
+
+.qualite{
+  padding: 5px;
+}
+
+.heightA{
+  height: 200px;
+}
+
+.heightB{
+  height: 100px;
+}
+
+/* Style the search field */
+.box-weather form.example input[type=text] {
+  padding: 10px;
+  font-size: 17px;
+  border: 1px solid grey;
+  float: left;
+  width: 80%;
+  background: #f1f1f1;
+}
+
+/* Style the submit button */
+.box-weather form.example button {
+  float: left;
+  width: 20%;
+  padding: 10px;
+  background: #00adc6;
+  color: white;
+  font-size: 17px;
+  border: 1px solid grey;
+  border-left: none; /* Prevent double borders */
+  cursor: pointer;
+}
+
+.box-weather form.example button:hover {
+  background: #00a4bc;
+}
+
+/* Clear floats */
+.box-weather form.example::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.box-news{
+  text-align: center;
+}
+
+#slogan {
+  font-family: 'Pacifico', cursive;
+  font-size: 50px;
+  color: whitesmoke;
+  text-shadow: 1px 1px grey;
+}
+
+strong {
+  font-weight: bolder;
+  font-size: 1.3em;
+  text-shadow: 1px 1px black;
+}
