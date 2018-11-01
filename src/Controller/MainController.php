@@ -30,15 +30,9 @@ use App\Service\Mailer;
  */
 class MainController extends Controller
 {
-    /**
-     * @Route("/", name="default_index", methods="GET")
-     */
-    public function indexAction(){
 
-            return $this->render('base.html.twig');
-    }
     /**
-     * @Route("/accueil", name="accueil", methods={"GET", "POST"})
+     * @Route("/", name="accueil", methods={"GET", "POST"})
      */
     public function AccueilAction(Request $request,Mailer $mailer){
 
@@ -148,12 +142,12 @@ class MainController extends Controller
 
         if (isset($_POST['ville'])) {
             $ville = $_POST['ville'];
-
+            $newVille = str_replace(' ', '%20', $ville);
             $donnees = $this->getDoctrine()->getManager()
                 ->getRepository(Info::class)->findOneBy(['commune'=>$ville]);
 
 
-            $api = 'https://api.apixu.com/v1/forecast.json?key=ea49c70579214bf1b16204559181107&q=' . $ville . '&lang=fr';
+            $api = 'https://api.apixu.com/v1/forecast.json?key=ea49c70579214bf1b16204559181107&q=' . $newVille . '&lang=fr';
             $response = file_get_contents($api);
             $jsonobj = json_decode($response);
         }else{

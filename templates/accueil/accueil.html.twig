@@ -114,7 +114,7 @@
                             <p>Activités extérieures: Toutes les conditions atmosphériques sont réunies ! C'est le bon moment pour sortir vous dépenser !</p>
                         {% elseif donnees.qualiteAir == "Moyenne" %}
                             <p>Personnes sensibles ou en bas-âge: Vous pouvez prendre l'air ! Néanmoins, nous vous conseillons de chercher un lieu aux alentours ayant une meilleure qualité d'air !</p>
-                            <p>Activités extérieures: Vous pouvez pratiquer une activité physique, mais la qualité de l'air n'étant pas optimale, nous vous suggérons d'attendre qu'un meilleur se profile !</p>
+                            <p>Activités extérieures: Vous pouvez pratiquer une activité physique, mais la qualité de l'air n'étant pas optimale, nous vous suggérons d'attendre qu'un meilleur jour se profile !</p>
                         {% elseif donnees.qualiteAir == "Médiocre" %}
                             <p>Personnes sensibles ou en bas-âge: Évitez si possible de sortir de chez vous, vous risqueriez de mourir !</p>
                             <p>Activités extérieures: Limiter les activités physiques et sportives intenses (dont les compétitions), autant en plein air qu’à l’intérieur.</p>
@@ -135,6 +135,7 @@
             </div>
             <div class="col-12">
                 <p class="text-center">Pour recevoir chaque jour un récapitulatif de la qualité de l'air, vous pouvez vous abonner à notre Newsletter</p>
+                <p class="font-weight-bold text-danger text-center">(Afin de respecter la loi sur le RGPD du 25/05/2018, ce formulaire a été désactivé et n'enregistre donc aucune donnée personnelle)</p>
             </div>
         </div>
         <div class="container">
@@ -174,7 +175,8 @@
                     <p style="margin-top: -20px">{{ form_widget(form.moyenTransport) }}</p>
                 </div>
             </div>
-            <input type="submit" class="btn btn-primary" style="margin-left: 40%">
+            <div class="btn btn-primary" style="margin-left: 40%;">S'abonner</div>
+            {#<input type="submit" class="btn btn-primary" style="margin-left: 40%">#}
             {{ form_end(form) }}
 
 
